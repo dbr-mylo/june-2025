@@ -54,7 +54,7 @@ Prioritization focuses on delivering a strong MVP first, with clear expansion pa
 - Collaborative Live Editing
 - Export to DOCX, HTML, Markdown
 - Advanced Typography Tools (widow control, kerning)
-- AI Content and Layout Suggestions
+- AI-Assisted Content Editing and Template-Based Layout Suggestions
 
 ---
 

@@ -22,7 +22,10 @@ The Dashboard acts as the user’s entry point for documents and templates.
    - Click to open in Editor + Preview view.
 
 2. **New Document Button**
-   - Start new document workflow (Template selection required if multiple available).
+   - Starts a new blank document with default formatting.
+   - If templates exist, the user may optionally apply one before writing or during editing.
+   - Templates are not required — Contributors can work without one or choose one later.
+
 
 3. **Templates Section (Template Editors Only)**
    - Manage Templates (Create, Edit, Publish, Unpublish).

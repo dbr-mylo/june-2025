@@ -22,6 +22,8 @@ Contributors write freely using a toolbar with formatting tools. They can choose
 - Editor formatting is ignored in Preview
 - Smart Style Inference determines structure
 - Preview shows the final styled output
+- In the MVP, Smart Style Inference is limited to heuristics only (e.g., font size, line breaks, emphasis). AI-based content classification is planned for a future phase.
+
 
 ## Template Toggle
 - In document header: `Template: None` or `Template: [Name]`

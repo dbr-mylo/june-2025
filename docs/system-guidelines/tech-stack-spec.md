@@ -23,10 +23,11 @@ Mylo's tech stack is designed to provide a flexible, scalable, and maintainable 
 
 ---
 
-# 3. AI Integration: **OpenAI**
-- The AI features of Mylo will use **OpenAI** for content generation and writing assistance, enhancing the writing process by suggesting text, improving grammar, or generating ideas.
-- In the future, we may incorporate more advanced AI tools like **TensorFlow** or **Google AI** to support **design automation**, such as creating templates or suggesting design elements.
-- OpenAI’s API will allow **real-time suggestions** and **automated content generation** for faster document creation.
+# 3. AI Integration (Planned Post-MVP)
+> ⚠️ AI features are **not part of the MVP**. This section outlines future potential integrations.
+- Future versions of Mylo may integrate **OpenAI** to support writing assistance, such as suggesting content, rewriting, or summarizing.
+- We may also explore using tools like **TensorFlow** or **Google AI** to assist with **template creation** or layout suggestions.
+- These enhancements would be introduced only after core document workflows and formatting logic are complete.
 
 ---
 

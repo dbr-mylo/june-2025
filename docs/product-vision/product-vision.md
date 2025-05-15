@@ -65,7 +65,7 @@ Beyond MVP, Mylo aims to become a powerful yet intuitive system supporting:
 - **Flexible Style Ranges:** Allow Contributors limited flexibility (e.g., font size 10–14pt) controlled by Templates.
 - **Template Marketplace:** A way to browse, buy, or share Templates across teams and companies.
 - **Advanced Typography Control:** Features like widow control, optical kerning, smart spacing adjustments.
-- **AI Writing and Layout Suggestions:** Assist Contributors in optimizing content fit and flow.
+- **AI-Assisted Writing and Layout (Future)** Explore tools to help Contributors improve clarity and fit their content within template constraints — such as rewrite suggestions, summaries, or layout-aware nudges.
 - **Full Native Desktop Versions:** Identical web and desktop app experiences for all users.
 
 Mylo will always prioritize clarity, user empowerment, and brand integrity at its core.
