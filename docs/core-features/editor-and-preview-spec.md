@@ -29,12 +29,30 @@ These two panels work together to maximize creative flexibility while ensuring c
 - Ignores Contributor formatting that is not supported by the Template.
 - Live update: every keystroke in the Editor re-renders the Preview instantly.
 - Shows true pagination (page breaks, margins, visual output).
+- Multi-page documents are displayed in a **vertically stacked page view** (Option 1).
+- Users scroll vertically to move through pages.
+- Page breaks are clearly marked with visible whitespace or separator lines.
+- The Preview Panel preserves accurate print layout and spacing across pages.
+- Pagination updates dynamically as content is edited in the Editor.
+_Note: Future versions may include a floating page navigator or zoom control. These are not included in the MVP._
+
 
 ## Panel Behavior (MVP)
 - Panels are side-by-side, divided by a draggable handle.
 - Contributors can resize Editor and Preview panels horizontally.
 - Minimum width thresholds prevent collapsing either panel entirely.
 - Default starting split: 50% Editor | 50% Preview.
+
+
+### Scroll Together
+When **Scroll Together** is enabled (via toggle in the top navigation), the Editor and Preview panels remain in sync during scrolling.
+- Scrolling behavior is **cursor-based**:
+  - If the user’s cursor is in the Editor, scrolling that panel will move the Preview in sync.
+  - If the user clicks into the Preview, the sync behavior reverses.
+- Syncing behavior only applies while typing or scrolling by mouse/trackpad.
+- Manual scrolling of the non-focused panel will temporarily disable syncing until refocused.
+- The default state for Scroll Together is **enabled**.
+
 
 ---
 
@@ -45,7 +63,6 @@ These two panels work together to maximize creative flexibility while ensuring c
 - **Responsive Preview:** Auto-adjust Preview rendering based on panel width.
 - **Detached Preview:** Allow Preview in a floating or external window.
 - **Preview Toggle:** Allow hiding the Preview Panel temporarily for focus mode.
-- **Scroll Together:** Syncs scrolling between the Editor and Preview panels.
 
 ---
 

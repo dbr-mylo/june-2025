@@ -24,8 +24,8 @@ Toolbar buttons like Bold, Italic, and Underline are used in both the Contributo
 
 **Contributor Toolbar**  
 - **Font selector** with dropdown list of fonts.
-- **Font resizing** incrementally by 1pt (input field range 1–99).
-- **Predetermined font sizes**: 8pt, 12pt, 16pt, 20pt, 24pt, 32pt.
+- **Font resizing** incrementally by 1pt (input field range 1–99). Includes numeric input and increment/decrement arrows (▲ ▼).
+- **Predetermined font sizes**: 8, 9, 10, 11, 12, 16, 20, 24, 32pt.
 - **Font color selector**.
 - **Bold, Italic, Underline, Strikethrough**.
 - **Bullet lists, Number lists, Letter lists**.
@@ -34,6 +34,10 @@ Toolbar buttons like Bold, Italic, and Underline are used in both the Contributo
 - **Insert link button**.
 - **Superscript and Subscript buttons**.
 - **Clear formatting button**.
+- **Insert menu** with:
+  - **Page Break**
+  - **Section Break**
+
 
 **Template Editor Toolbar**  
 - **All Contributor Toolbar features**, plus:
@@ -61,6 +65,24 @@ Toolbar buttons like Bold, Italic, and Underline are used in both the Contributo
 - **Drag-and-drop toolbar customization**.
 - **Dynamic toolbar layout switching** between vertical and horizontal modes.
 - **Auto-detection of role and button visibility** for customization purposes.
+
+## Future Insert Menu Items (Post-MVP)
+The following Insert options are visible in mockups but not part of the MVP:
+
+- Table
+- Special Characters
+- Numbered List Options
+- Horizontal Line
+- Chart
+- Emoji
+- Table of Contents
+- Headers & Footers
+- Page Numbers
+- Footnote
+- Equation
+
+These should appear in the Insert menu with "Coming Soon" tags or be disabled with a tooltip: “Planned for future update.”
+
 
 ---
 
