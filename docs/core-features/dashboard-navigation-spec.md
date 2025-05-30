@@ -38,6 +38,23 @@ The Dashboard acts as the user’s entry point for documents and templates.
 5. **Search Bar**
    - Search documents by title.
    - Filter by file type (document/template).
+
+
+---
+
+## Contributor Template Visibility (MVP)
+
+Contributors can view and apply templates from within the Editor + Preview screen. Templates are:
+
+- **Optional** – Contributors may choose to write without a template or apply one before or after writing.
+- **Discoverable** – A dropdown labeled **“Select a Template”** appears in the Preview Panel if templates have been made available by a Template Editor.
+- **Contextual** – The dropdown only appears once a document is open and is not shown from the dashboard itself.
+- **Empty State Handling** – If no templates are assigned, the dropdown appears disabled with the message: *“No templates available.”*
+
+### Mockup States Required
+- **Empty** (dropdown disabled with message)
+- **With Templates** (active dropdown showing options like Letterhead, Report, Newsletter)
+
   
 ---
 
