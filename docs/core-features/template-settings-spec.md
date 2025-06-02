@@ -12,53 +12,122 @@ Template Settings are the “master controls” for page layout and formatting. 
 
 # MVP Scope
 
-- **Page Margins & Size**  
-  - Set top, right, bottom, and left margins (e.g., 1" each) with numeric inputs.  
-  - Live ruler preview in the Template Settings UI.
+## Page Layout
 
-- **Global Hyphenation**  
-  - Toggle hyphenation on/off for the entire template.  
-  - Configure basic rules (min prefix/suffix letters, hyphen limits).
+* Set page size and individual margins (top, right, bottom, left) using numeric inputs.
+* Live ruler preview in the Template Settings UI.
 
-- **Style Palette**  
-  - Define up to **10 named styles** (e.g., Heading 1, Body Text, Caption).  
-  - Each style configurable with: font family, font size, font weight, color, line height, letter spacing.  
-  - Styles can be toggled on/off in the palette.  
-  - Users apply styles via a toolbar dropdown or by clicking in the on-canvas Styles Palette.
+## Global Hyphenation
+
+* Toggle hyphenation on/off for the entire template.
+* Configure basic rules (e.g., minimum prefix/suffix characters).
+* Hyphenation is a Template-level setting and does not live in individual styles.
+
+## Style Palette
+
+* Define up to **10 named styles** (e.g., Heading 1, Body Text, Caption).
+* Each style includes:
+
+  * Font family
+  * Font size
+  * Font weight
+  * Text color
+  * Line height
+  * Letter spacing
+* Styles are managed within the palette and are applied via toolbar dropdown or on-canvas palette.
+
+## Contributor Controls (Template-Dependent)
+
+* Contributors can toggle the following if allowed by the Template:
+
+  * Page numbering
+  * Header visibility
+  * Footer visibility
+
+## Smart Text Sanitation (Preview Only)
+
+Applied only in the Preview panel and Export—not during editing. These improve layout quality without affecting writing flow.
+
+* Collapse double or more spaces into a single space
+* Remove trailing spaces at the end of lines/paragraphs
+* Remove leading space at the start of a paragraph
+* Normalize quotation marks:
+
+  * Replace straight quotes with smart quotes
+  * Exception: use straight quotes after numbers (e.g., inches)
+* Standardize ellipses: Convert `...` to `…`
+* Strip unsupported/invisible characters (e.g., zero-width spaces, non-breaking spaces)
 
 ---
 
 # Functional Requirements
 
-**Template Editor**  
-- Set page dimensions and margins for a template.  
-- Enable or disable hyphenation globally and configure basic hyphenation rules.  
-- Create, rename, and toggle up to 10 named styles in the Style Palette, and set their typographic properties.  
+**Template Editor**
 
-**Contributor**  
-- Inherit all Template Settings defaults when creating a new document.  
-- Override per-document style properties via the Style Settings modal (except global hyphenation, which remains template-controlled).  
-- Access and apply the Style Palette via the toolbar dropdown or on-canvas palette.
+* Set page size and margin values
+* Enable/disable global hyphenation and configure its rules
+* Define and manage style palette (up to 10 styles)
+* Set text sanitation behaviors for preview/export
+* Allow toggles for page number, header/footer visibility
+
+**Contributor**
+
+* Inherit Template Settings when creating a new document
+* Override styles per document via Style Settings modal
+* Cannot override hyphenation settings
+* Apply styles via toolbar dropdown or canvas palette
+* View template formatting applied in Preview panel only
 
 ---
 
 # Interaction Between Template Settings & Style Settings Modal
 
-- Any value left at “default” in the Style Settings modal reads from Template Settings.  
-- Resetting a document to defaults re-syncs with Template Settings values.  
-- Style Settings changes apply only to the document; Template Settings remain unchanged.
+* Any value left at “default” in the Style Settings modal inherits from Template Settings
+* Resetting document styles re-syncs with Template Settings
+* Style Settings affect only the document; Template Settings remain unchanged
+* All sanitation and formatting rules apply only in the Preview and Export views
+
+---
+
+# Error Handling
+
+* **Invalid Input Values**: If an invalid margin or style value is entered, the system highlights the field and prevents saving until corrected.
+* **Template Load Failure**: If a template fails to load, a fallback message appears and contributors are prompted to choose another template or start without one.
+* **Sanitation Errors in Preview**: If sanitation rules fail to apply (e.g., due to unsupported characters), the system logs the issue and continues rendering without crashing. A fallback rendering mode is used.
+* **Unavailable Fonts**: If a font defined in the template is unavailable, a default fallback font is used and flagged in the Preview panel.
 
 ---
 
 # Future Enhancements (Post-MVP)
 
-- **Column Gutters / Multi-column Layouts**: Support setting column count and gutter width.  
-- **User-Preference Defaults**: Move Default Zoom into user preferences rather than template.  
-- **Additional Style Controls**: Allow custom naming and grouping of styles beyond the initial 10 presets.  
-- **Header/Footer Presets**: Revisit after refining common use-cases and patterns.
+## Layout and Structural
+
+* Column gutters / multi-column layouts
+* Header/footer presets
+* Responsive spacing rules (based on content length or layout size)
+
+## Style System
+
+* Allow more than 10 named styles
+* Custom naming and grouping of styles
+* Support for style ranges (e.g., font size range, line height range)
+* First-line indent and list style customization (moved to styles)
+
+## Behavior and Sanitization
+
+* Auto-capitalize first letter of sentences
+* Auto-correct common typos
+* Smart punctuation replacement (e.g., `--` → em dash, `+/-` → ±)
+* Detect and flag ALL CAPS words
+* Custom dash handling preferences (template-level):
+
+  * Em dash (no space)
+  * En dash (with space)
+  * No substitution
+* Define behavior for tabs in pasted text (e.g., strip, replace, indent)
 
 ---
 
 # Version
 
-Mylo Template Settings Specification v1.2 — April 2025
+Mylo Template Settings Specification v1.3 — June 2025

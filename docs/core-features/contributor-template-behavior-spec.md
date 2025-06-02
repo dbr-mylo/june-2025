@@ -47,6 +47,16 @@ These items should appear in the Insert menu with "Coming Soon" tags or be visua
 - In the MVP, Smart Style Inference is limited to heuristics only (e.g., font size, line breaks, emphasis). AI-based content classification is planned for a future phase.
 
 
-## Template Toggle
-- In document header: `Template: None` or `Template: [Name]`
-- Export uses Preview if template is applied; editor if not
+## Template Selection
+
+Contributors can select or change the active template from within the Editor + Preview interface.
+
+- A **dropdown labeled “Select a Template”** appears in the Preview Panel.
+- Contributors may choose:
+  - **Template: None** (freeform mode)
+  - Or one of the available templates assigned by a Template Editor (e.g., Letterhead, Report)
+- Template can be changed at any time during editing.
+- If no templates are available, the dropdown is disabled with the message: *“No templates available.”*
+- When exporting:
+  - If a template is applied, export reflects the styled Preview.
+  - If no template is selected, export reflects the Editor formatting.
