@@ -1,23 +1,18 @@
-# Smart Style Inference – Risks & Mitigations (MVP Scope)
+# Smart Style Inference – Risks & Mitigations
 
-See `smart-style-inference-spec.md` for implementation details.
+## Overview
+Smart heuristics infer style roles (e.g., headings vs. body text) based on formatting behaviors to apply consistent preview styling.
 
----
+## Key Risks
 
-## Risk 1: Misclassification
-- **Issue**: Heuristics may mislabel a block (e.g., paragraph as heading)
-- **Mitigation**:
-  - Use fallback rules and prioritization logic
-  - Allow Template Editors to disable Smart Inference per template
+| Risk ID | Risk Description | Likelihood | Impact | Priority | Notes |
+|---------|------------------|------------|--------|----------|-------|
+| R1 | Incorrect classification of content leading to mismatched styles. | High | Medium | High |  |
+| R2 | Overwriting user-intended structure due to heuristics. | Medium | Medium | Medium |  |
 
----
+## Mitigations
 
-## Risk 2: Preview and Editor Divergence
-- **Issue**: Contributor may be confused when preview doesn’t match their formatting
-- **Mitigation**:
-  - Clearly label preview area
-  - Add toggles to compare view/output
-
----
-
-> 📝 Note: AI-based classification and NLP limitations are **out of scope for MVP** and will be re-evaluated in a future phase.
+| Risk ID | Mitigation Strategy | Owner | Status | Notes |
+|---------|----------------------|--------|--------|-------|
+| R1 | Log inferred styles and allow users to override manually post-MVP. | AI Team | Planned |  |
+| R2 | Use only non-destructive inference for preview; editor content remains unchanged. | Dev Team | Complete |  |

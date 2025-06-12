@@ -6,7 +6,11 @@ Template Settings define the global design defaults every document starts with. 
 
 # Overview
 
+Although Template Settings and Styles are presented in separate panels within the Template Editor, both are saved together as a single template entity. This ensures consistency and portability across templates, while preserving clear boundaries for editing and presentation.
+
 Template Settings are the “master controls” for page layout and formatting. They live in the Template Editor’s dashboard under “Settings” and apply to all new documents created from that template.
+
+Template Settings cover layout and formatting rules that are **not style-specific**. The Style Palette is defined separately and managed via the Styles system. While implementation details may evolve, both Template Settings and Styles are expected to be stored consistently as part of the same template object.
 
 ---
 
@@ -15,34 +19,12 @@ Template Settings are the “master controls” for page layout and formatting. 
 ## Page Layout
 
 * Set page size and individual margins (top, right, bottom, left) using numeric inputs.
-* Live ruler preview in the Template Settings UI.
 
 ## Global Hyphenation
 
 * Toggle hyphenation on/off for the entire template.
 * Configure basic rules (e.g., minimum prefix/suffix characters).
 * Hyphenation is a Template-level setting and does not live in individual styles.
-
-## Style Palette
-
-* Define up to **10 named styles** (e.g., Heading 1, Body Text, Caption).
-* Each style includes:
-
-  * Font family
-  * Font size
-  * Font weight
-  * Text color
-  * Line height
-  * Letter spacing
-* Styles are managed within the palette and are applied via toolbar dropdown or on-canvas palette.
-
-## Contributor Controls (Template-Dependent)
-
-* Contributors can toggle the following if allowed by the Template:
-
-  * Page numbering
-  * Header visibility
-  * Footer visibility
 
 ## Smart Text Sanitation (Preview Only)
 
@@ -66,16 +48,13 @@ Applied only in the Preview panel and Export—not during editing. These improve
 
 * Set page size and margin values
 * Enable/disable global hyphenation and configure its rules
-* Define and manage style palette (up to 10 styles)
 * Set text sanitation behaviors for preview/export
-* Allow toggles for page number, header/footer visibility
 
 **Contributor**
 
 * Inherit Template Settings when creating a new document
 * Override styles per document via Style Settings modal
 * Cannot override hyphenation settings
-* Apply styles via toolbar dropdown or canvas palette
 * View template formatting applied in Preview panel only
 
 ---
@@ -86,6 +65,7 @@ Applied only in the Preview panel and Export—not during editing. These improve
 * Resetting document styles re-syncs with Template Settings
 * Style Settings affect only the document; Template Settings remain unchanged
 * All sanitation and formatting rules apply only in the Preview and Export views
+* If both Template Settings and a Style define the same property (e.g., font family or line height), the Style takes precedence. Template Settings act as global defaults and are overridden by Styles where applicable."
 
 ---
 
@@ -105,6 +85,8 @@ Applied only in the Preview panel and Export—not during editing. These improve
 * Column gutters / multi-column layouts
 * Header/footer presets
 * Responsive spacing rules (based on content length or layout size)
+* Ruler in Template Settings UI
+* Contributor controls for page number, header visibility, footer visibility
 
 ## Style System
 

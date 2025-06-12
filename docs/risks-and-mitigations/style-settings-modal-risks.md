@@ -1,7 +1,16 @@
-# style-settings-modal-risks – Risks & Mitigations
+# Style Settings Modal – Risks & Mitigations
 
-See `style-settings-modal-risks.md` for implementation details.
+## Overview
+This modal allows Template Editors to edit style definitions for paragraphs, headings, captions, etc.
 
-## Risk 1: [Risk Summary]
-- **Issue**: [Description]
-- **Mitigation**: [Mitigation steps]
+## Key Risks
+
+| Risk ID | Risk Description | Likelihood | Impact | Priority | Notes |
+|---------|------------------|------------|--------|----------|-------|
+| R1 | Incorrect overrides or inheritance logic not clear. | Medium | High | Medium |  |
+
+## Mitigations
+
+| Risk ID | Mitigation Strategy | Owner | Status | Notes |
+|---------|----------------------|--------|--------|-------|
+| R1 | Use visual indicators for inheritance and show live preview of changes. | Frontend | Planned |  |

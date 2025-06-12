@@ -1,21 +1,18 @@
-# Contributor Template Behavior – Risks & Mitigations
+# Contributor + Template Interaction – Risks & Mitigations
 
-See `contributor-template-behavior-spec.md` for usage behavior and toolbar details.
+## Overview
+Contributors can write freely, but if a template is applied, their formatting is overridden in Preview.
 
-## Risk 1: Visual Inconsistency (No Template)
-- **Issue**: Documents may appear unbranded or inconsistent
-- **Mitigation**:
-  - Default to templates for shared/team docs
-  - Admin controls to enforce template usage
+## Key Risks
 
-## Risk 2: Export Confusion
-- **Issue**: Contributor expects editor formatting in output, but Preview defines style
-- **Mitigation**:
-  - Clear messaging: “Your output reflects the selected template”
-  - Add toggle to view output formatting live
+| Risk ID | Risk Description | Likelihood | Impact | Priority | Notes |
+|---------|------------------|------------|--------|----------|-------|
+| R1 | Writers confused when their formatting doesn’t appear in preview. | High | Medium | High |  |
+| R2 | Templates may enforce inappropriate styles if mismatch occurs. | Medium | Medium | Medium |  |
 
-## Risk 3: Style Override Conflict
-- **Issue**: Contributor applies formatting that is overridden by template
-- **Mitigation**:
-  - Keep editor formatting tools visible
-  - Explain that styles are overridden in Preview view
+## Mitigations
+
+| Risk ID | Mitigation Strategy | Owner | Status | Notes |
+|---------|----------------------|--------|--------|-------|
+| R1 | Add warning or banner when template is applied and preview differs. | Design | Planned |  |
+| R2 | Allow template switching and template previews before applying. | Product | Planned |  |

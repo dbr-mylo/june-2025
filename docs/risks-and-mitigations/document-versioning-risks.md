@@ -1,7 +1,18 @@
-# document-versioning-risks – Risks & Mitigations
+# Document Versioning – Risks & Mitigations
 
-See `document-versioning-risks.md` for implementation details.
+## Overview
+Versioning allows users to revert to past states and track document changes over time.
 
-## Risk 1: [Risk Summary]
-- **Issue**: [Description]
-- **Mitigation**: [Mitigation steps]
+## Key Risks
+
+| Risk ID | Risk Description | Likelihood | Impact | Priority | Notes |
+|---------|------------------|------------|--------|----------|-------|
+| R1 | Accidental data loss if versions are not properly stored or restored. | High | High | High |  |
+| R2 | Confusion over current vs. historical version. | Medium | Medium | Medium |  |
+
+## Mitigations
+
+| Risk ID | Mitigation Strategy | Owner | Status | Notes |
+|---------|----------------------|--------|--------|-------|
+| R1 | Save diffs on major actions and test rollback logic thoroughly. | Backend | Planned |  |
+| R2 | Label versions clearly and allow preview before restore. | Design | Planned |  |
