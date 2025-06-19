@@ -1,73 +1,65 @@
-# Welcome to your Lovable project
+# Mylo – April 2025
 
-## Project info
+**Mylo** is a modern document platform that cleanly separates content creation from layout and design. It empowers writers to focus purely on writing while ensuring visual consistency through role-based templates and styles.
 
-**URL**: https://lovable.dev/projects/aebf2d65-4b46-4597-ae98-f7566e185c30
+---
 
-## How can I edit this code?
+## 🚀 Overview
 
-There are several ways of editing your application.
+Most writing tools today either:
 
-**Use Lovable**
+- Give writers full control over formatting (leading to inconsistencies), or
+- Require design expertise to maintain brand alignment.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/aebf2d65-4b46-4597-ae98-f7566e185c30) and start prompting.
+**Mylo** solves this by introducing clear role separation:
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Contributors** (Writers): Draft content freely in a structured editor.
+- **Template Editors** (Designers): Define the final layout and styles.
+- **Admins**: Manage users, templates, permissions, and system settings.
+- **Guests**: Temporary or demo users for testing templates and documents.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🧩 Key Features
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- 🔄 **Live Editor + Preview Panel** – Write in one panel, see real-time formatting in the other.
+- 🧠 **Template Enforcement** – Templates control layout, styles, and visual hierarchy.
+- 💾 **Local Save & Export** – Save work as `.mylo` files or export finished PDFs.
+- 🎨 **Design System Support** – Manage fonts, spacing, and logos through role-specific controls.
+- 🔐 **Role-Based Access** – Each user type sees and controls only what’s relevant to them.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🗂️ Project Structure
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+This repo includes:
 
-# Step 3: Install the necessary dependencies.
-npm i
+- ✅ Markdown-based specs in [`/docs`](./docs/)
+- ✅ User roles and permission documentation
+- ✅ Core feature definitions and user stories
+- ✅ Roadmaps, data models, and technical planning
+- ✅ UX prototypes and starter UI directions
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+For an organized entry point, see [`docs/README-docs.md`](./docs/README-docs.md)
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## ⚙️ Tech Stack
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
+- React + Vite
 - TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- TailwindCSS + shadcn/ui
+- Supabase (auth + storage)
+- Mammoth.js (.docx parsing)
+- GitHub for version control
+- Vercel (planned deployment)
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/aebf2d65-4b46-4597-ae98-f7566e185c30) and click on Share -> Publish.
+## 🛠 Getting Started
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```bash
+git clone git@github.com:dbr-mylo/mylo-april-2025.git
+cd mylo-april-2025
+npm install
+npm run dev

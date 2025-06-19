@@ -1,0 +1,204 @@
+## Mylo Sitemap – Updated Specification
+
+### Authentication Screen
+
+* **Sign-in**:
+
+  * Email, Google, GitHub supported
+  * Leads to role-based dashboard view
+* **Sign-up**:
+
+  * Role selected or assigned post-signup
+  * Email/SSO registration flow
+* **Guest**:
+
+  * Temporary session
+  * Can create documents/templates
+  * Can view own created templates as Contributor
+  * Supports preview mode via link (Minimal Viewer)
+
+---
+
+## Roles
+
+### Contributor (Default/Basic User Role)
+
+* **Includes:** Writing content, viewing templates, selecting templates for formatting
+
+#### Dashboard
+
+* **Horizontal Bar**
+
+  * Right side: Notification icon, Light/Dark toggle
+
+* **Left Sidebar**
+
+  * User Menu: Profile, Settings, Notifications, Appearance
+  * Team Folder Navigation (with access scoped by Admins)
+  * Recent
+  * Folder navigation (uses nested mode)
+
+* **Right Side: Main Dashboard Area**
+
+  * Sections:
+
+    * **Documents**
+
+      * New document button
+      * Saved documents list
+      * Sorting (Date/Title)
+      * Thumbnail or List view toggle
+    * **Templates**
+
+      * Assigned templates list
+      * Icons to view preview
+
+* **Workspace View**
+
+  * Editor Panel (Left)
+  * Preview Panel (Right)
+  * Panel divider resizable
+
+* **Trash View**
+
+  * Centralized trash with role-based filters
+
+---
+
+### Template Editor (Includes Contributor)
+
+* **Includes:** All Contributor features + template creation and management
+
+#### Dashboard
+
+* Inherits Contributor layout
+
+* **Left Sidebar**: Adds links to:
+
+  * Templates (Owned/Assigned)
+  * Template Creation View
+
+* **Right Side: Main Dashboard Area**
+
+  * Sections:
+
+    * Templates
+
+      * New Template button
+      * Search and filter by status
+      * Statuses: Draft, Finalized (locked), Unpublished, Shared to Group
+      * Share button: Share template with team group
+      * Template preview button
+
+* **Editor Panel for Template Creation**
+
+  * First Horizontal Bar
+
+    * Template Name field
+    * Save/Auto-save indicator
+
+  * Second Horizontal Bar
+
+    * Template Settings
+    * Zoom controls
+
+  * Left Sidebar
+
+    * Typography controls
+    * Text dropdowns
+    * Font settings
+    * Alignment tools
+    * List types
+    * Styling options: Bold, Italic, Underline, Strikethrough
+    * Color Picker, Background, Clear Formatting
+
+  * Right Panel (Template Settings Panel)
+
+    * Display Styles / Style Sets
+    * Style Previews (Thumbnail or list)
+    * Inheritance Logic
+    * Paragraph rules
+    * Template Info
+    * Export PDF, Save as Template
+
+---
+
+### Team Admin (Includes Template Editor)
+
+* **Includes:** Contributor + Template Editor + User Management
+
+#### Dashboard
+
+* Same UI as Template Editor
+
+* **Left Sidebar** adds:
+
+  * User Management
+  * Template Group Permissions (e.g., share with team/folder)
+
+* **Right Dashboard Area** adds:
+
+  * User List
+
+    * Name, Email, Role (Contributor, Template Editor, Admin)
+    * Sortable, Filterable
+    * New User button
+
+* **Trash**
+
+  * Centralized Trash View with filters:
+
+    * Documents, Templates, Users
+    * Restore/Delete permanently
+
+---
+
+### Guest (Temporary Access Role)
+
+* Access to Contributor and Template Editor modes
+* Cannot publish templates or manage users
+* Can:
+
+  * View assigned templates
+  * Create documents and templates
+  * Preview content
+  * Switch roles in demo mode
+
+---
+
+### Minimal Viewer (Fallback Read-Only Mode)
+
+* Triggered by shared link with preview enabled
+* No editing tools visible
+* View only, inline preview of document with template formatting applied
+
+---
+
+### Global Features
+
+* **AI Panel** (Contributor & Template Editor)
+
+  * Context-aware suggestions: Rewrite, Summarize, Reorder
+  * Appears based on selection or cursor
+  * Trigger manual prompt entry
+
+* **Export Options**
+
+  * `.mylo` format for local save
+  * PDF export
+
+* **Template Publishing Controls** (Template Editor + Admin)
+
+  * Publish/Unpublish
+  * Assign to teams/groups
+
+* **Template Sets**
+
+  * Support assigning multiple templates as a group
+  * Contributor sees only assigned set per doc
+
+* **Trash System**
+
+  * One central Trash view
+  * Filter by item type (Template, Document, User)
+  * Role-based restore/delete permissions
