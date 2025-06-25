@@ -1,0 +1,73 @@
+# Mylo Guest Demo Mode Specification
+
+---
+
+# Overview
+
+Provide an instant, frictionless way for prospective users to explore Mylo without creating an account or selecting a role. This is not a full user role. It’s a temporary, local-only experience.
+
+---
+
+# MVP Scope
+
+* Guest demo is triggered via a single "Try Demo" button.
+* No authentication, session token, or role selection required.
+* All data is ephemeral and stored locally (in-memory or via `localStorage`).
+* Focus is on showing core UI and basic interactions, not real feature depth or persistence.
+
+---
+
+# Demo Mode Behavior
+
+## Entry Point
+
+* Button: **Try Demo**
+* Action: Immediately enters demo mode and loads a default Contributor-like experience.
+
+## UI & Labeling
+
+* A visible banner displays: `Demo Mode`
+* Tooltip or modal explains limitations (e.g., no saving/exporting)
+
+## Data Handling
+
+* Load pre-seeded mock data (documents, templates)
+* No API calls or backend interaction
+* All actions are local only
+
+## Feature Access
+
+| Feature         | Behavior                               |
+| --------------- | -------------------------------------- |
+| Save Document   | Disabled (tooltip: "Sign up to save")  |
+| Export PDF      | Disabled or mocked                     |
+| Create Template | Disabled or mocked                     |
+| User Management | Hidden                                 |
+| AI Features     | Disabled or hardcoded mocks (optional) |
+
+## Session Rules
+
+* Use `localStorage.demoMode = true` to toggle state
+* Data is reset on page refresh or tab close
+* No 2-hour expiration, session tokens, or idle timers
+
+---
+
+# Error Handling
+
+* Attempting to use disabled actions (e.g., Save, Export) should show tooltips or non-blocking alerts.
+* Any internal failures in mock data loading should fall back to an empty state and display a toast or banner.
+* Network errors should not occur — demo mode must be completely offline/local.
+
+---
+
+# Future Enhancements (Post-MVP)
+
+* Allow Guest to convert session to full signup
+* Add lightweight analytics (e.g., time spent, features clicked)
+
+---
+
+# Version
+
+Mylo Guest Demo Mode Specification v1.0 — June 2025
