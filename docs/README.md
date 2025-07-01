@@ -56,7 +56,18 @@ Every spec follows the same structure and includes:
 - **Mammoth.js** (.docx import)
 - **GitHub** (version control)
 - **Vercel** (planned deployment)
-- **Lovable.dev** (AI development platform)
+- **Lovable.dev** (AI agent used to build and update Mylo’s codebase)
+
+---
+
+## 🛠 Getting Started
+
+```bash
+git clone git@github.com:dbr-mylo/june-2025.git
+cd june-2025
+npm install
+npm run dev
+```
 
 ---
 
@@ -82,11 +93,6 @@ Every spec follows the same structure and includes:
 
 ---
 
-## 🛠 Getting Started
+## 📌 Version
 
-```bash
-git clone git@github.com:dbr-mylo/june-2025.git
-cd june-2025
-npm install
-npm run dev
-```
+Mylo Root README v2.0 — June 2025
