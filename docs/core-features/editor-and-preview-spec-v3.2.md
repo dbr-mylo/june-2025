@@ -1,0 +1,4 @@
+- Tiptap powers the Editor Panel
+- Tiptap is extended using modular extensions:
+  - Installed: basic formatting, headings, lists, alignment, font, link, superscripts
+  - Excluded for MVP: tables, task lists, images, collaboration cursors
