@@ -1,65 +1,98 @@
-# Mylo – April 2025
+# Mylo – June 2025
 
-**Mylo** is a modern document platform that cleanly separates content creation from layout and design. It empowers writers to focus purely on writing while ensuring visual consistency through role-based templates and styles.
+**Mylo** is a role-based document platform that separates content creation from visual design. It empowers Contributors to write freely while allowing Template Editors to control formatting and structure through reusable templates.
 
 ---
 
 ## 🚀 Overview
 
-Most writing tools today either:
+Most writing tools either:
 
-- Give writers full control over formatting (leading to inconsistencies), or
-- Require design expertise to maintain brand alignment.
+- Give writers full control over formatting (creating inconsistency), or
+- Require designers to manage every visual detail.
 
-**Mylo** solves this by introducing clear role separation:
+**Mylo** fixes this with clean role separation:
 
-- **Contributors** (Writers): Draft content freely in a structured editor.
-- **Template Editors** (Designers): Define the final layout and styles.
-- **Admins**: Manage users, templates, permissions, and system settings.
-- **Guests**: Temporary or demo users for testing templates and documents.
+- **Contributors**: Write freely using a live Editor while the Preview panel enforces formatting.
+- **Template Editors**: Create and manage templates, including layout, styles, and brand assets.
+- **Admins**: Assign templates, manage users, and maintain role-based access.
+- **Guests**: Temporary/demo users who can explore Mylo in a sandboxed environment.
 
 ---
 
 ## 🧩 Key Features
 
-- 🔄 **Live Editor + Preview Panel** – Write in one panel, see real-time formatting in the other.
-- 🧠 **Template Enforcement** – Templates control layout, styles, and visual hierarchy.
-- 💾 **Local Save & Export** – Save work as `.mylo` files or export finished PDFs.
-- 🎨 **Design System Support** – Manage fonts, spacing, and logos through role-specific controls.
-- 🔐 **Role-Based Access** – Each user type sees and controls only what’s relevant to them.
+- 📝 **Dual-Pane Interface** – Contributors write on the left and preview output on the right.
+- 🧠 **Template Enforcement** – Styles, layouts, and formatting defined by role-based templates.
+- 💾 **Local Save & Export** – Save `.mylo` files or export print-ready PDFs.
+- 🎨 **Design System Support** – Templates include custom fonts, spacing, and images.
+- 🔐 **Role-Based Permissions** – All access is scoped by user role.
 
 ---
 
-## 🗂️ Project Structure
+## 🗂️ Documentation Structure
 
-This repo includes:
+All official documentation lives in [`/docs`](./docs/), organized by feature area and versioned using semantic tags (`v1.0`, `v1.1`, etc.).
 
-- ✅ Markdown-based specs in [`/docs`](./docs/)
-- ✅ User roles and permission documentation
-- ✅ Core feature definitions and user stories
-- ✅ Roadmaps, data models, and technical planning
-- ✅ UX prototypes and starter UI directions
+For details, start with:
 
-For an organized entry point, see [`docs/README-docs.md`](./docs/README-docs.md)
+- [`/docs/README.md`](./docs/README.md)
+- [`starter-kit-spec-organization-standard-V2.md`](./docs/starter-kit-spec-organization-standard-V2.md)
+
+Every spec follows the same structure and includes:
+- MVP scope
+- Behavior and UI rules
+- Error handling
+- Known gaps and future enhancements
 
 ---
 
 ## ⚙️ Tech Stack
 
-- React + Vite
-- TypeScript
-- TailwindCSS + shadcn/ui
-- Supabase (auth + storage)
-- Mammoth.js (.docx parsing)
-- GitHub for version control
-- Vercel (planned deployment)
+- **React + Vite** (frontend)
+- **TypeScript**
+- **TailwindCSS + shadcn/ui**
+- **Supabase** (auth + storage)
+- **Mammoth.js** (.docx import)
+- **GitHub** (version control)
+- **Vercel** (planned deployment)
+- **Lovable.dev** (AI agent used to build and update Mylo’s codebase)
 
 ---
 
 ## 🛠 Getting Started
 
 ```bash
-git clone git@github.com:dbr-mylo/mylo-april-2025.git
-cd mylo-april-2025
+git clone git@github.com:dbr-mylo/june-2025.git
+cd june-2025
 npm install
 npm run dev
+```
+
+---
+
+## 📘 README Changelog
+
+### v2.0 — June 2025
+
+- Rewrote to reflect new project scope and terminology  
+- Replaced all references to “Writer” and “Designer” with **Contributor** and **Template Editor**  
+- Updated role definitions to match latest inheritance model  
+- Replaced outdated `/docs/README-docs.md` pointer with `/docs/README.md`  
+- Added full folder breakdown based on `docs/` structure as of June 2025  
+- Introduced versioning principles and documentation standards  
+- Added table of recommended reading order for onboarding  
+
+---
+
+### v1.0 — April 2025
+
+- Initial project definition and folder setup  
+- Described concept of role-based document formatting  
+- Outlined high-level tech stack and contributor goals  
+
+---
+
+## 📌 Version
+
+Mylo Root README v2.0 — June 2025
