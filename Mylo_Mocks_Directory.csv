@@ -1,19 +1,64 @@
-Current File Name,Subfolder,Full Path
-Dashboard Sidebar dropdowns.png,.,/mnt/data/docs_extracted/docs/mocks/Dashboard Sidebar dropdowns.png
-User Admin-1.png,User-Admin,/mnt/data/docs_extracted/docs/mocks/User-Admin/User Admin-1.png
-Contributor-Documents Marketing.png,Contributor,/mnt/data/docs_extracted/docs/mocks/Contributor/Contributor-Documents Marketing.png
-Contributor Work screen-3.png,Contributor,/mnt/data/docs_extracted/docs/mocks/Contributor/Contributor Work screen-3.png
-Contributor Work screen-2.png,Contributor,/mnt/data/docs_extracted/docs/mocks/Contributor/Contributor Work screen-2.png
-Contributor Work screen-1.png,Contributor,/mnt/data/docs_extracted/docs/mocks/Contributor/Contributor Work screen-1.png
-Contributor Work screen-4.png,Contributor,/mnt/data/docs_extracted/docs/mocks/Contributor/Contributor Work screen-4.png
-Contributor-Documents.png,Contributor,/mnt/data/docs_extracted/docs/mocks/Contributor/Contributor-Documents.png
-Contributor-Documents Empty State.png,Contributor,/mnt/data/docs_extracted/docs/mocks/Contributor/Contributor-Documents Empty State.png
-Contributor-future.png,Contributor/future,/mnt/data/docs_extracted/docs/mocks/Contributor/future/Contributor-future.png
-Template Editor-Blank State.png,Template-Editor,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Template Editor-Blank State.png
-Template Editor specs.png,Template-Editor,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Template Editor specs.png
-Template Editor Work Screen.png,Template-Editor,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Template Editor Work Screen.png
-Template Editor.png,Template-Editor,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Template Editor.png
-Lines.png,Template-Editor/Style modal,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Style modal/Lines.png
-Hyphenation.png,Template-Editor/Style modal,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Style modal/Hyphenation.png
-Typography.png,Template-Editor/Style modal,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Style modal/Typography.png
-Lists.png,Template-Editor/Style modal,/mnt/data/docs_extracted/docs/mocks/Template-Editor/Style modal/Lists.png
+,Current File Name,Subfolder,Full Path
+2,admin-dashboard-user-management.png,User-Admin,mocks/User-Admin/admin-dashboard-user-management.png
+3,new-user-modal-1.png,User-Admin,mocks/User-Admin/new-user-modal-1.png
+4,new-user-modal-2.png,User-Admin,mocks/User-Admin/new-user-modal-2.png
+5,contributor-work-editor-preview-4.png,Contributor,mocks/Contributor/contributor-work-editor-preview-4.png
+6,contributor-work-editor-preview-5.png,Contributor,mocks/Contributor/contributor-work-editor-preview-5.png
+7,contributor-dashboard-documents-marketing-folder.png,Contributor,mocks/Contributor/contributor-dashboard-documents-marketing-folder.png
+8,contributor-work-editor-preview-6.png,Contributor,mocks/Contributor/contributor-work-editor-preview-6.png
+9,contributor-dashboard-documents-empty-state.png,Contributor,mocks/Contributor/contributor-dashboard-documents-empty-state.png
+10,contributor-work-editor-preview-2.png,Contributor,mocks/Contributor/contributor-work-editor-preview-2.png
+12,contributor-work-editor-preview-3.png,Contributor,mocks/Contributor/contributor-work-editor-preview-3.png
+13,contributor-work-editor-preview-1.png,Contributor,mocks/Contributor/contributor-work-editor-preview-1.png
+14,contributor-dashboard-documents-list.png,Contributor,mocks/Contributor/contributor-dashboard-documents-list.png
+15,contributor-work-editor-preview-pallete.png,Contributor,mocks/Contributor/contributor-work-editor-preview-pallete.png
+16,Contributor animation.mp4,Contributor,mocks/Contributor/Contributor animation.mp4
+17,contributor-work-editor-preview-4.png,Contributor/_do_not_use,mocks/Contributor/_do_not_use/contributor-work-editor-preview-4.png
+18,contributor-work-editor-preview-2.png,Contributor/_do_not_use,mocks/Contributor/_do_not_use/contributor-work-editor-preview-2.png
+19,contributor-work-editor-preview-3.png,Contributor/_do_not_use,mocks/Contributor/_do_not_use/contributor-work-editor-preview-3.png
+20,contributor-work-editor-preview-1.png,Contributor/_do_not_use,mocks/Contributor/_do_not_use/contributor-work-editor-preview-1.png
+21,contributor-future-workflow.png,Contributor/future,mocks/Contributor/future/contributor-future-workflow.png
+23,login-sign-in.png,General-UI,mocks/General-UI/login-sign-in.png
+24,login-sign-up.png,General-UI,mocks/General-UI/login-sign-up.png
+25,dashboard-sidebar-dropdowns.png,General-UI,mocks/General-UI/dashboard-sidebar-dropdowns.png
+26,New Folder Modal.png,General-UI,mocks/General-UI/New Folder Modal.png
+27,trash-5.png,General-UI/trash,mocks/General-UI/trash/trash-5.png
+28,trash-4.png,General-UI/trash,mocks/General-UI/trash/trash-4.png
+29,trash-1.png,General-UI/trash,mocks/General-UI/trash/trash-1.png
+30,trash-3.png,General-UI/trash,mocks/General-UI/trash/trash-3.png
+31,trash-2.png,General-UI/trash,mocks/General-UI/trash/trash-2.png
+32,template-editor-work-screen.png,Template-Editor,mocks/Template-Editor/template-editor-work-screen.png
+34,template-editor-dashboard-screen.png,Template-Editor,mocks/Template-Editor/template-editor-dashboard-screen.png
+35,template-editor-work-screen-styles-palette.png,Template-Editor,mocks/Template-Editor/template-editor-work-screen-styles-palette.png
+36,template-editor-spec-settings.png,Template-Editor,mocks/Template-Editor/template-editor-spec-settings.png
+37,template-editor-blank-state.png,Template-Editor,mocks/Template-Editor/template-editor-blank-state.png
+38,template-editor-work-screen-v2.png,Template-Editor,mocks/Template-Editor/template-editor-work-screen-v2.png
+39,template-editor-style-modal-hyphenation.png,Template-Editor/Style modal,mocks/Template-Editor/Style modal/template-editor-style-modal-hyphenation.png
+41,template-editor-style-modal-lines.png,Template-Editor/Style modal,mocks/Template-Editor/Style modal/template-editor-style-modal-lines.png
+42,template-editor-style-modal-typography.png,Template-Editor/Style modal,mocks/Template-Editor/Style modal/template-editor-style-modal-typography.png
+43,template-editor-style-modal-lists.png,Template-Editor/Style modal,mocks/Template-Editor/Style modal/template-editor-style-modal-lists.png
+46,._admin-dashboard-user-management.png,__MACOSX/User-Admin,__MACOSX/mocks/User-Admin/._admin-dashboard-user-management.png
+47,._new-user-modal-1.png,__MACOSX/User-Admin,__MACOSX/mocks/User-Admin/._new-user-modal-1.png
+48,._new-user-modal-2.png,__MACOSX/User-Admin,__MACOSX/mocks/User-Admin/._new-user-modal-2.png
+49,._contributor-work-editor-preview-4.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-work-editor-preview-4.png
+50,._contributor-work-editor-preview-5.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-work-editor-preview-5.png
+51,._contributor-work-editor-preview-6.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-work-editor-preview-6.png
+52,._contributor-dashboard-documents-empty-state.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-dashboard-documents-empty-state.png
+53,._contributor-work-editor-preview-2.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-work-editor-preview-2.png
+55,._contributor-work-editor-preview-3.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-work-editor-preview-3.png
+56,._contributor-work-editor-preview-1.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-work-editor-preview-1.png
+57,._contributor-dashboard-documents-list.png,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._contributor-dashboard-documents-list.png
+58,._Contributor animation.mp4,__MACOSX/Contributor,__MACOSX/mocks/Contributor/._Contributor animation.mp4
+59,._contributor-work-editor-preview-1.png,__MACOSX/Contributor/_do_not_use,__MACOSX/mocks/Contributor/_do_not_use/._contributor-work-editor-preview-1.png
+61,._trash-5.png,__MACOSX/General-UI/trash,__MACOSX/mocks/General-UI/trash/._trash-5.png
+62,._trash-4.png,__MACOSX/General-UI/trash,__MACOSX/mocks/General-UI/trash/._trash-4.png
+63,._trash-1.png,__MACOSX/General-UI/trash,__MACOSX/mocks/General-UI/trash/._trash-1.png
+64,._trash-3.png,__MACOSX/General-UI/trash,__MACOSX/mocks/General-UI/trash/._trash-3.png
+65,._trash-2.png,__MACOSX/General-UI/trash,__MACOSX/mocks/General-UI/trash/._trash-2.png
+67,._template-editor-dashboard-screen.png,__MACOSX/Template-Editor,__MACOSX/mocks/Template-Editor/._template-editor-dashboard-screen.png
+68,._template-editor-spec-settings.png,__MACOSX/Template-Editor,__MACOSX/mocks/Template-Editor/._template-editor-spec-settings.png
+69,._template-editor-work-screen-v2.png,__MACOSX/Template-Editor,__MACOSX/mocks/Template-Editor/._template-editor-work-screen-v2.png
+70,._template-editor-style-modal-hyphenation.png,__MACOSX/Template-Editor/Style modal,__MACOSX/mocks/Template-Editor/Style modal/._template-editor-style-modal-hyphenation.png
+72,._template-editor-style-modal-lines.png,__MACOSX/Template-Editor/Style modal,__MACOSX/mocks/Template-Editor/Style modal/._template-editor-style-modal-lines.png
+73,._template-editor-style-modal-typography.png,__MACOSX/Template-Editor/Style modal,__MACOSX/mocks/Template-Editor/Style modal/._template-editor-style-modal-typography.png
+74,._template-editor-style-modal-lists.png,__MACOSX/Template-Editor/Style modal,__MACOSX/mocks/Template-Editor/Style modal/._template-editor-style-modal-lists.png
