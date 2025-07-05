@@ -20,6 +20,26 @@ Most writing tools either:
 
 ---
 
+
+---
+
+### 👩‍💻 Start Here for Developers
+
+If you're a developer (human or AI), follow these steps:
+
+1. **Clone and run the app locally:**
+   ```bash
+   git clone git@github.com:dbr-mylo/june-2025.git
+   cd june-2025
+   npm install
+   npm run dev
+   ```
+
+2. **Read `/docs/README.md`** for an overview of how specs are structured.
+3. Review the **MVP scope and priorities** in [`/docs/roadmap-v1.1.md`](./docs/roadmap-v1.1.md).
+4. Reference [`/docs/dev-gap-questions.md`](./docs/dev-gap-questions.md) to see what still needs clarification.
+5. UI + formatting work starts in the `MyloEditor.tsx` file inside [`/src/components`](./src/components).
+
 ## 🧩 Key Features
 
 - 📝 **Dual-Pane Interface** – Contributors write on the left and preview output on the right.
