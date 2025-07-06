@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines MVP risks tied to preview zoom functionality, including potential misinterpretation of layout and interface disruptions.
+
+# MVP Scope
+
+This file outlines MVP risks tied to preview zoom functionality, including potential misinterpretation of layout and interface disruptions.
+
 # Zoom Functionality – Risks & Mitigations
 
 ## Overview

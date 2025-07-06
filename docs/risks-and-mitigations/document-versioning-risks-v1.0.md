@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks associated with implementing document version control, including how versions are saved, displayed, and restored.
+
+# MVP Scope
+
+This file outlines the MVP risks associated with implementing document version control, including how versions are saved, displayed, and restored.
+
 # Document Versioning – Risks & Mitigations
 
 ## Overview

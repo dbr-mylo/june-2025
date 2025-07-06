@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks of implementing zoom functionality across a split-screen editor and preview environment.
+
+# MVP Scope
+
+This file outlines the MVP risks of implementing zoom functionality across a split-screen editor and preview environment.
+
 # Editor + Preview Split Zoom – Risks & Mitigations
 
 ## Overview

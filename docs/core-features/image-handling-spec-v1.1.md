@@ -1,111 +1,152 @@
+# Image Handling Specification — v1.1
 
-# Mylo Image Handling Specification v1.1 — July 2025
+June 2025
 
 ---
 
 # Overview
-This document defines how images are uploaded, stored, positioned, and rendered in Mylo, across all user roles. It distinguishes between template-controlled images and contributor-inserted images, and outlines current MVP support versus post-MVP behavior.
+
+This specification defines how Mylo handles image insertion, replacement, rendering, restrictions, and export behavior across user roles. Images are static and embedded in the document content flow. Support is limited to the PNG and JPEG formats for MVP.
 
 ---
 
 # MVP Scope
 
-## Image Types Supported
-1. **Template Images (Fixed)**
-   - Added by Template Editors only
-   - Not editable or replaceable by Contributors
-   - Used for logos, decorative elements, and layout artwork
+## Supported File Types
 
-## Upload & Storage
-- **Roles Allowed**: Only Template Editors
-- **Supported formats**: `.jpg`, `.png`, `.svg`
-- **Max file size**: 5MB
-- **Storage Location**: Supabase Storage
-- **Path Format**: `/images/{templateId}/{filename}`
-- **Security**: Signed URLs; scoped access by user role
+- `.png`, `.jpg`, `.jpeg`
+- Max file size: 10MB
+- Static images only — no GIF, SVG, or animated formats
 
-## Placement Behavior (Template Images)
-- Position and size are defined statically by the Template Editor at the time of placement
-- Template Editors set image frame dimensions via numeric inputs or size presets
-- ❌ **Interactive resizing** (e.g., drag handles) is not supported in MVP
-- CSS `object-fit` strategies (`contain`, `cover`) control image fit within the defined frame
-- Contributors cannot move, replace, or remove template images
+## Contributor Role
+
+- Can:
+  - Insert images via the Insert menu
+  - Replace placeholder images
+- Cannot:
+  - Move or delete locked images defined in the Template
+  - Resize images
+- Preview shows final image layout based on Template rules
+
+## Template Editor Role
+
+- Can:
+  - Insert, position, and style images in the Template
+  - Mark images as:
+    - **Locked** (not editable by Contributors)
+    - **Replaceable** (Contributor can swap but not move/resize)
+- Can define image placeholder boxes with labels (e.g. “Drop headshot here”)
+
+## Export
+
+- Export to PDF includes all images at 300dpi
+- Broken or missing image links show fallback icon in export
+- Images are embedded in `.mylo` files, not linked externally
+
+---
+
+# Main Behavior Sections
+
+## Save Behavior Rules
+
+- Uploaded image assets are stored in Supabase Storage
+- Image metadata is stored in Supabase DB and linked to document/template
+- `.mylo` export bundles image binary content inside archive
+- Replaceable image swaps preserve original bounding box and alignment
 
 ## UI Behavior
-- Template Editors:
-  - Upload via drag-and-drop or file picker
-  - Define frame size before or during upload
-  - Can preview, replace, or remove image assets
-- Contributors:
-  - See template images in Preview and Export only
-  - Cannot interact with images in any way
 
-## Error Handling
-- Upload fails → inline error with retry option
-- Image fails to load → fallback to placeholder icon and toast alert
+| Context | Behavior |
+|---------|----------|
+| Insert Menu | “Image” option opens file picker |
+| Accepted Types | `.jpg`, `.jpeg`, `.png` only |
+| Max File Size | 10MB — enforced on upload |
+| Locked Images | Show lock icon on hover; no editing allowed |
+| Replaceable Images | “Replace” button appears on click |
+| Template Editor | Drag-and-drop positioning + image label UI |
 
 ---
 
-# Post-MVP Support
+# Stack Behavior
 
-## Contributor-Controlled Images
+- Supabase Storage used for image asset storage
+- Images linked via public URL stored in DB
+- On document load, image metadata is resolved into position placeholders
+- Export process fetches image content and embeds in PDF
 
-### 1. **Zone-Based Image Upload (Static Slots)**
-- Contributor places images in predefined zones
-- Zones defined by Template Editor with fixed dimensions
-- Drop behavior: `contain` or `cover`
-- Use case: Profile pictures, feature images
+## Data Models
 
-### 2. **Inline (In-Flow) Images**
-- Contributor inserts images directly in the content stream
-- Behaves like rich-text blocks (e.g., Notion, Google Docs)
-- Requires wrapping rules, float alignment, spacing logic
-- Complex to implement, not supported in MVP
-
-### 3. **Placeholder Images / Soft Zones**
-- Template includes hints for where an image might go
-- Contributor decides to insert image or ignore it
-- Visual placeholders may be displayed but are non-binding
-
-### 4. **Background Images / Decorative Zones**
-- Full-page or section-level background images
-- Always controlled by the Template Editor
-- Positioned behind text and locked
-
-### 5. **External or Dynamic Images**
-- Sourced from external APIs or DAMs
-- Used for user profile photos, external data pulls
-- Requires URL validation, CORS handling
+| Field | Type | Notes |
+|-------|------|-------|
+| id | UUID | Image asset ID |
+| url | String | Public Supabase URL |
+| alt | String | Optional alt text |
+| locked | Boolean | Prevents Contributor editing |
+| replaceable | Boolean | Allows Contributor to swap |
+| uploadedBy | UUID | User ID |
+| linkedTo | UUID | Document or Template ID |
 
 ---
 
-# Image Movement and Repositioning
+# Additional Technical Sections (Optional)
 
-## MVP
-- **No repositioning support**
-- Template Editor defines image position and frame size statically
-- ❌ Images cannot be dragged, resized, or adjusted after placement
+### Placeholder Handling
 
-## Post-MVP
-- Template Editors may be allowed to interactively:
-  - Drag and reposition images
-  - Resize images using handles
-  - Toggle aspect-ratio lock
-- ✅ This will require a **layout engine** to manage:
-  - Click-to-select behavior
-  - Live resizing and snapping
-  - Z-index and layering control
-  - Canvas/grid-based positioning
+- Placeholder boxes can contain:
+  - Label text (e.g. “Insert logo here”)
+  - Replacement rules (required or optional)
+- Labels do not appear in export if image is present
 
 ---
 
-# Future Considerations
-- Shared image libraries across teams
-- Cropping and zooming tools
-- Alt-text and accessibility metadata
-- Image versioning and rollback
+# Error Handling
+
+| Condition | Behavior |
+|----------|----------|
+| Upload invalid file type | Reject with error message |
+| Image > 10MB | Reject and display size warning |
+| Image fails to load | Show “Image failed to load” message in Preview |
+| Export image missing | Insert missing image icon + log warning |
+
+---
+
+# Known Gaps / Outstanding Questions
+
+- Should Contributors be able to crop images? (Effort: High, Status: Deferred)
+- Can Template Editors define fixed aspect ratios? (Effort: Medium, Status: TBD)
+- Is there a need for alt-text enforcement in MVP? (Effort: Low, Status: Optional)
+
+---
+
+# Future Enhancements (Post-MVP)
+
+- Aspect ratio locks for image placeholders
+- Crop and rotate tools
+- Drag-to-resize in Preview (Template Editor only)
+- SVG support
+- AI image generation or alt-text suggestion
+- Auto-scaling to page width or columns
+
+---
+
+# Technical Dependencies
+
+- Supabase Storage (bucket: `images/`)
+- Image insertion handler
+- File picker with size/type validation
+- PDF export image embedder
+- Image metadata serializer for `.mylo` files
+
+---
+
+# API / Data Schema Notes
+
+- `POST /api/images/upload` — used by all roles
+- `PATCH /api/images/:id` — replace or reassign
+- `DELETE /api/images/:id` — Template Editor only (future)
 
 ---
 
 # Version
-Mylo Image Handling Specification v1.1 — July 2025
+
+Image Handling Specification v1.1 — June 2025

@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines MVP risks around implementing undo/redo functionality within the Mylo editor, including stack persistence and user expectation handling.
+
+# MVP Scope
+
+This file outlines MVP risks around implementing undo/redo functionality within the Mylo editor, including stack persistence and user expectation handling.
+
 # Undo/Redo – Risks & Mitigations
 
 ## Overview

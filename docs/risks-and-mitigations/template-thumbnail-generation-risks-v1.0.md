@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines MVP risks associated with generating visual thumbnails for templates, covering rendering accuracy, fallback behavior, and role-based access.
+
+# MVP Scope
+
+This file outlines MVP risks associated with generating visual thumbnails for templates, covering rendering accuracy, fallback behavior, and role-based access.
+
 # Thumbnail Creation for Templates — Risks & Mitigations
 
 This document outlines potential risks associated with the Thumbnail Creation feature in Mylo and proposes mitigation strategies for each.

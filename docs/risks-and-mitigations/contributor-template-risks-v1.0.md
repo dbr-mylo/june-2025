@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks involved in allowing Contributors to interact with Template-based formatting, including limitations on template enforcement, preview accuracy, and Contributor behavior handling.
+
+# MVP Scope
+
+This file outlines the MVP risks involved in allowing Contributors to interact with Template-based formatting, including limitations on template enforcement, preview accuracy, and Contributor behavior handling.
+
 # Contributor + Template Interaction – Risks & Mitigations
 
 ## Overview

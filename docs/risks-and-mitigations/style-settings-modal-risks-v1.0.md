@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks tied to the Style Settings Modal, including potential user misunderstandings and conflicts with template defaults.
+
+# MVP Scope
+
+This file outlines the MVP risks tied to the Style Settings Modal, including potential user misunderstandings and conflicts with template defaults.
+
 # Style Settings Modal – Risks & Mitigations
 
 ## Overview

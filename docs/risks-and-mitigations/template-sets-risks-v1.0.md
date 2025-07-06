@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks of supporting multiple template sets across organizations, including version control, misuse, and access scope issues.
+
+# MVP Scope
+
+This file outlines the MVP risks of supporting multiple template sets across organizations, including version control, misuse, and access scope issues.
+
 # Template Sets – Risks & Mitigations
 
 ## Overview

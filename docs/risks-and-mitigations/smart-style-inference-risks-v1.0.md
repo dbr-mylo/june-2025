@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks of Smart Style Inference, including incorrect heuristic detection and contributor confusion when styles are auto-assigned.
+
+# MVP Scope
+
+This file outlines the MVP risks of Smart Style Inference, including incorrect heuristic detection and contributor confusion when styles are auto-assigned.
+
 # Smart Style Inference – Risks & Mitigations
 
 ## Overview

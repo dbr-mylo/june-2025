@@ -75,6 +75,9 @@ Each header/footer zone supports:
 
 # Token Support (MVP)
 
+Refer to [tokens-supported-in-template-spec.md](tokens-supported-in-template-spec.md) for a full list of supported tokens, their usage, fallback behavior, and resolution logic.
+
+
 | Token | Description | Editable By |
 |-------|-------------|-------------|
 | `{{document_title}}` | Document title entered by Contributor | ✅ |

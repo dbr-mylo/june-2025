@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines MVP risks related to Template Settings, including how global layout properties like margins, page size, and hyphenation could affect document rendering and consistency.
+
+# MVP Scope
+
+This file outlines MVP risks related to Template Settings, including how global layout properties like margins, page size, and hyphenation could affect document rendering and consistency.
+
 # Template Settings – Risks & Mitigations
 
 ## Overview

@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks around local file saving and PDF exporting from `.mylo` documents.
+
+# MVP Scope
+
+This file outlines the MVP risks around local file saving and PDF exporting from `.mylo` documents.
+
 # Local Save & Export – Risks & Mitigations
 
 ## Overview

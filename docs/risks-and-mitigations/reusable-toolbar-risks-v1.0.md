@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines the MVP risks associated with implementing a reusable toolbar across Contributor and Template Editor roles, including missing formatting features and UI consistency challenges.
+
+# MVP Scope
+
+This file outlines the MVP risks associated with implementing a reusable toolbar across Contributor and Template Editor roles, including missing formatting features and UI consistency challenges.
+
 # Reusable Toolbar – Risks & Mitigations
 
 ## Overview

@@ -1,3 +1,11 @@
+# Overview
+
+This file outlines MVP risks related to font management, font loading, fallback behavior, and contributor access to approved fonts.
+
+# MVP Scope
+
+This file outlines MVP risks related to font management, font loading, fallback behavior, and contributor access to approved fonts.
+
 # Font Handling – Risks & Mitigations
 
 ## Overview
