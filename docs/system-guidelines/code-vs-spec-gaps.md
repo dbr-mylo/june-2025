@@ -1,32 +1,61 @@
-# Code vs Spec Gaps – June 2025 Audit
+# Code vs. Spec Gaps — MVP Audit
 
-This document tracks structural gaps between current code implementation and the specifications defined for the Mylo MVP. These items reflect key features or flows mentioned in specs that have not yet been scaffolded or stubbed in the codebase.
+**Version:** v1.0  
+**Last Updated:** July 2025  
+**Status:** Triaged Audit of Unimplemented or Misaligned Specs
 
 ---
 
-## Feature Gaps vs Spec
+## Overview
+This document highlights major gaps between documented specifications and actual implementation as of July 2025. Each gap is tagged with an action recommendation.
 
-### 1. Template Editor Flow
-- **Gap**: Has the Template Editor flow been stubbed anywhere?
-- **Status**: Not yet implemented (To Do)
-- **Action**: Confirm route, components, and UI state for Template Editor onboarding and dashboard.
+---
 
-### 2. Template Editor Route/UI Placeholder
-- **Gap**: Is there a placeholder route or UI for the Template Editor role?
-- **Status**: Not found (To Do)
-- **Action**: Define and create a base route under `/pages` or `routes` for Template Editor.
+## Gap List
 
-### 3. Preview / Export Feature Skeleton
-- **Gap**: Is there any preview or export feature skeleton?
-- **Status**: Not scaffolded (To Do)
-- **Action**: Add minimal Preview component stub and PDF export placeholder.
+### 1. 🟥 Missing Template Editor Flow Implementation
+- **Issue:** No code flow exists for Template Editor to:
+  - Create a new template from scratch
+  - Define and save styles
+  - Assign sample content for preview testing
+- **Spec Exists:** ✅ `/docs/core-features/template-editor-user-stories.md`
+- **Action:** Build template creation flow with save → preview → publish logic
+
+### 2. 🟥 `autosave-sync-rules-v2.1.md` referenced nonexistent save status components
+- **Issue:** UI states `saving`, `error`, `clean`, and `dirty` were undocumented
+- **Now Resolved:** ✅ Added in new autosave spec (v2.1)
+- **Action:** Implement UI badge and error banner with debounce logic
+
+### 3. 🟨 No centralized `EditorContext` data flow
+- **Issue:** Code duplicates document state logic across editor/preview/toolbar
+- **Spec:** `/docs/system-guidelines/preview-panel-architecture.md`
+- **Action:** Create shared state context or hook that synchronizes real-time updates across all Editor components
+
+### 4. 🟨 Role-based toolbar logic incomplete
+- **Issue:** Tiptap extension buttons available to Contributors that are meant to be restricted (e.g. highlight, typography)
+- **Spec:** `/docs/system-guidelines/tiptap-extension-plan.md`
+- **Action:** Apply role checks to all extension commands
+
+### 5. 🟩 `role-based-routing-permissions` now aligned with implementation
+- **Issue:** Contradictory v1.0 and v2.0 specs replaced
+- **Now Resolved:** ✅ Canonical spec created and routing logic scaffolded
+- **Action:** Remove outdated files; enforce all guards via `<RequireRole />`
+
+### 6. 🟨 Missing Template Assignment Logic
+- **Issue:** No working code for selecting a template during document creation
+- **Spec Exists:** `/docs/core-features/template-system-spec.md`
+- **Action:** Add dropdown or modal to connect document to template ID
+
+---
+
+## Scoring Key
+- 🟥 High priority: MVP blocker or false spec
+- 🟨 Medium: Important but not blocking yet
+- 🟩 Resolved: Previously reported, now fixed
 
 ---
 
 ## Next Steps
-
-These gaps should either be:
-- Resolved during MVP scaffolding phase, or
-- Flagged in roadmap for short-term implementation.
-
-All changes should be tracked with commit messages referencing: `code-vs-spec-gap`.
+- Validate each gap via dev review or working prototype
+- Assign owners for remaining yellow items
+- Close loop with Lovable on MVP audit completion
