@@ -7,6 +7,7 @@ import BulletList from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list'
 import ListItem from '@tiptap/extension-list-item'
 import TextAlign from '@tiptap/extension-text-align'
+import CharacterCount from '@tiptap/extension-character-count'
 import { useState, useEffect } from 'react'
 import { EditorToolbar } from './EditorToolbar'
 import { Button } from '@/components/ui/button'
@@ -48,11 +49,33 @@ export const Editor = ({ className = '' }: EditorProps) => {
         types: ['heading', 'paragraph'],
         alignments: ['left', 'center', 'right'],
       }),
+      CharacterCount,
     ],
     content: '',
     editorProps: {
       attributes: {
         class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[400px] p-4',
+      },
+      handleKeyDown: (view, event) => {
+        const { state, dispatch } = view
+        
+        // Handle Tab for list indentation
+        if (event.key === 'Tab' && !event.shiftKey) {
+          if (editor?.commands.sinkListItem('listItem')) {
+            event.preventDefault()
+            return true
+          }
+        }
+        
+        // Handle Shift+Tab for list outdenting
+        if (event.key === 'Tab' && event.shiftKey) {
+          if (editor?.commands.liftListItem('listItem')) {
+            event.preventDefault()
+            return true
+          }
+        }
+        
+        return false
       },
     },
   })
@@ -79,7 +102,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
       const documentData = {
         content,
         lastModified: new Date().toISOString(),
-        wordCount: editor.storage.characterCount?.words() || 0,
+        wordCount: editor.storage.characterCount.words || 0,
       }
 
       localStorage.setItem('mylo-document', JSON.stringify(documentData))
@@ -113,14 +136,19 @@ export const Editor = ({ className = '' }: EditorProps) => {
       <div className="border-b border-border bg-background sticky top-0 z-10">
         <div className="flex items-center justify-between p-2">
           <EditorToolbar editor={editor} />
-          <Button 
-            onClick={handleSave}
-            disabled={isSaving}
-            variant="outline"
-            size="sm"
-          >
-            {isSaving ? 'Saving...' : 'Save'}
-          </Button>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">
+              {editor.storage.characterCount.words || 0} words
+            </span>
+            <Button 
+              onClick={handleSave}
+              disabled={isSaving}
+              variant="outline"
+              size="sm"
+            >
+              {isSaving ? 'Saving...' : 'Save'}
+            </Button>
+          </div>
         </div>
       </div>
 
