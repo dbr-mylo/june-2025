@@ -26,12 +26,17 @@ Each template has:
 
 ### Template 1: Modern Report
 ```json
-{'name': 'Modern Report', 'styles': {'h1': {'fontFamily': 'Lato', 'fontSize': '32px', 'color': '#1a1a1a'}, 'h2': {'fontFamily': 'Lato', 'fontSize': '24px', 'color': '#1a1a1a'}, 'p': {'fontFamily': 'Georgia', 'fontSize': '11px', 'lineHeight': '1.4', 'color': '#333333'}, 'ul': {'fontFamily': 'Georgia', 'fontSize': '11px', 'color': '#333333'}, 'ol': {'fontFamily': 'Georgia', 'fontSize': '11px', 'color': '#333333'}}}
+{'name': 'Modern Report', 'styles': {'h1': {'fontFamily': 'Lato', 'fontSize': '32px', 'color': '#1a1a1a'}, 'h2': {'fontFamily': 'Lato', 'fontSize': '24px', 'color': '#1a1a1a'}, 'p': {'fontFamily': 'Georgia', 'fontSize': '16px', 'lineHeight': '1.6', 'color': '#333333'}, 'ul': {'fontFamily': 'Georgia', 'fontSize': '16px', 'color': '#333333'}, 'ol': {'fontFamily': 'Georgia', 'fontSize': '16px', 'color': '#333333'}}}
 ```
 
 ### Template 2: Corporate Letterhead
 ```json
-{'name': 'Corporate Letterhead', 'styles': {'h1': {'fontFamily': 'Helvetica', 'fontSize': '28px', 'color': '#0055a5'}, 'h2': {'fontFamily': 'Helvetica', 'fontSize': '20px', 'color': '#0055a5'}, 'p': {'fontFamily': 'Helvetica', 'fontSize': '10px', 'lineHeight': '1.3', 'color': '#000000'}, 'ul': {'fontFamily': 'Helvetica', 'fontSize': '10px', 'color': '#000000'}, 'ol': {'fontFamily': 'Helvetica', 'fontSize': '10px', 'color': '#000000'}}}
+{'name': 'Corporate Letterhead', 'styles': {'h1': {'fontFamily': 'Helvetica', 'fontSize': '28px', 'color': '#0055a5'}, 'h2': {'fontFamily': 'Helvetica', 'fontSize': '20px', 'color': '#0055a5'}, 'p': {'fontFamily': 'Times New Roman', 'fontSize': '14px', 'lineHeight': '1.4', 'color': '#000000'}, 'ul': {'fontFamily': 'Times New Roman', 'fontSize': '14px', 'color': '#000000'}, 'ol': {'fontFamily': 'Times New Roman', 'fontSize': '14px', 'color': '#000000'}}}
+```
+
+### Template 3: Academic Paper
+```json
+{'name': 'Academic Paper', 'styles': {'h1': {'fontFamily': 'Times New Roman', 'fontSize': '24px', 'color': '#000000', 'fontWeight': 'bold'}, 'h2': {'fontFamily': 'Times New Roman', 'fontSize': '18px', 'color': '#000000', 'fontWeight': 'bold'}, 'p': {'fontFamily': 'Times New Roman', 'fontSize': '12pt', 'lineHeight': '2', 'color': '#000000'}, 'ul': {'fontFamily': 'Times New Roman', 'fontSize': '12pt', 'color': '#000000'}, 'ol': {'fontFamily': 'Times New Roman', 'fontSize': '12pt', 'color': '#000000'}}}
 ```
 
 ---
