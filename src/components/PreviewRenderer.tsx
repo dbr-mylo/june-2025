@@ -10,7 +10,7 @@ export const PreviewRenderer = ({ htmlContent }: PreviewRendererProps) => {
       </div>
       <div className="h-[calc(100%-60px)] overflow-auto p-6 bg-white">
         <div 
-          className="prose max-w-none"
+          className="max-w-none"
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       </div>
