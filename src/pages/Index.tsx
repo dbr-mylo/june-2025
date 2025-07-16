@@ -51,7 +51,7 @@ const Index = () => {
           </div>
           
           <div className="border border-border rounded-lg overflow-hidden bg-card shadow-sm">
-            <PreviewRenderer htmlContent={previewContent} />
+            <PreviewRenderer htmlContent={previewContent} templateName={selectedTemplate} />
           </div>
         </div>
       </div>
