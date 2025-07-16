@@ -16,10 +16,12 @@ export const PreviewRenderer = ({ htmlContent, templateName }: PreviewRendererPr
         )}
       </div>
       <div className="h-[calc(100%-80px)] overflow-auto p-6 bg-white">
-        <div 
-          className="max-w-none"
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
-        />
+        <div className="template-preview-isolation">
+          <div 
+            className="template-preview-content"
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
+          />
+        </div>
       </div>
     </div>
   );

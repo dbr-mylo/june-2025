@@ -57,7 +57,7 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
     const styles = template.styles[node.type as keyof typeof template.styles];
     const styleString = styles 
       ? Object.entries(styles)
-          .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value}`)
+          .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value} !important`)
           .join('; ')
       : '';
 
@@ -71,7 +71,7 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
         const headingStyles = template.styles[`h${level}` as keyof typeof template.styles];
         const headingStyleString = headingStyles
           ? Object.entries(headingStyles)
-              .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value}`)
+              .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value} !important`)
               .join('; ')
           : '';
         const hContent = node.content?.map(renderNode).join('') || '';

@@ -171,3 +171,29 @@
 .ProseMirror u {
   text-decoration: underline;
 }
+
+/* Template Preview Isolation */
+.template-preview-isolation {
+  all: initial;
+  font-family: initial;
+  font-size: initial;
+  line-height: initial;
+  color: initial;
+  background: white;
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+.template-preview-content {
+  all: unset;
+  display: block;
+  width: 100%;
+}
+
+.template-preview-content * {
+  all: unset;
+  display: revert;
+  box-sizing: border-box;
+}
