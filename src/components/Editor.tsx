@@ -21,6 +21,25 @@ export const Editor = ({ className = '' }: EditorProps) => {
   const { toast } = useToast()
   const [isSaving, setIsSaving] = useState(false)
 
+  // Manual word count function as fallback
+  const getWordCount = (editor: any) => {
+    if (!editor) return 0
+    
+    // Try CharacterCount extension first
+    try {
+      if (editor.storage.characterCount?.words) {
+        return editor.storage.characterCount.words() || 0
+      }
+    } catch (error) {
+      console.warn('CharacterCount extension failed, using manual count')
+    }
+    
+    // Fallback to manual counting
+    const text = editor.getText().trim()
+    if (!text) return 0
+    return text.split(/\s+/).length
+  }
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -100,7 +119,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
       const documentData = {
         content,
         lastModified: new Date().toISOString(),
-        wordCount: editor.storage.characterCount?.words?.() || 0,
+        wordCount: getWordCount(editor),
       }
 
       localStorage.setItem('mylo-document', JSON.stringify(documentData))
@@ -136,7 +155,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
           <EditorToolbar editor={editor} />
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">
-              {editor.storage.characterCount?.words?.() || 0} words
+              {getWordCount(editor)} words
             </span>
             <Button 
               onClick={handleSave}
