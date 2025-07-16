@@ -100,7 +100,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
       const documentData = {
         content,
         lastModified: new Date().toISOString(),
-        wordCount: editor.storage.characterCount.words() || 0,
+        wordCount: editor.storage.characterCount?.words?.() || 0,
       }
 
       localStorage.setItem('mylo-document', JSON.stringify(documentData))
@@ -136,7 +136,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
           <EditorToolbar editor={editor} />
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">
-              {editor.storage.characterCount.words() || 0} words
+              {editor.storage.characterCount?.words?.() || 0} words
             </span>
             <Button 
               onClick={handleSave}
