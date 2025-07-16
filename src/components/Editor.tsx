@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useImperativeHandle } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Bold from '@tiptap/extension-bold'
@@ -97,6 +97,13 @@ export const Editor = React.forwardRef<any, EditorProps>(({ className = '' }, re
       },
     },
   })
+
+  // Expose editor instance through ref
+  useImperativeHandle(ref, () => ({
+    getJSON: () => editor?.getJSON(),
+    getHTML: () => editor?.getHTML(),
+    getText: () => editor?.getText()
+  }), [editor])
 
   // Load content from localStorage on mount
   useEffect(() => {

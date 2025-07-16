@@ -12,10 +12,17 @@ const Index = () => {
   const editorRef = useRef<any>(null);
 
   const handleRefreshPreview = () => {
+    console.log('Refresh Preview clicked');
+    console.log('Editor ref:', editorRef.current);
     if (editorRef.current) {
       const editorJson = editorRef.current.getJSON();
+      console.log('Editor JSON:', editorJson);
+      console.log('Selected template:', selectedTemplate);
       const styledHtml = applyTemplateToContent(editorJson, selectedTemplate);
+      console.log('Styled HTML:', styledHtml);
       setPreviewContent(styledHtml);
+    } else {
+      console.log('Editor ref is null');
     }
   };
 
