@@ -41,25 +41,48 @@ interface TiptapNode {
   attrs?: any;
 }
 
+// Helper function to map Tiptap node types to template style keys
+function getTemplateStyleKey(nodeType: string, level?: number): string {
+  switch (nodeType) {
+    case 'paragraph':
+      return 'p';
+    case 'heading':
+      return `h${level || 1}`;
+    case 'bulletList':
+      return 'ul';
+    case 'orderedList':
+      return 'ol';
+    default:
+      return nodeType;
+  }
+}
+
 export function applyTemplateToContent(tiptapJson: any, templateName: TemplateName): string {
   console.log('=== TemplateEngine Debug ===');
   console.log('Template Name:', templateName);
-  console.log('Tiptap JSON:', tiptapJson);
+  console.log('Tiptap JSON:', JSON.stringify(tiptapJson, null, 2));
   
   if (!tiptapJson || !tiptapJson.content) {
     return '<p>No content to preview</p>';
   }
 
   const template = TEMPLATES[templateName];
-  console.log('Selected Template:', template);
+  console.log('Selected Template:', JSON.stringify(template, null, 2));
   
   function renderNode(node: TiptapNode): string {
-    const styles = template.styles[node.type as keyof typeof template.styles];
+    const styleKey = getTemplateStyleKey(node.type, node.attrs?.level);
+    console.log(`Node type: ${node.type} → Style key: ${styleKey}`);
+    
+    const styles = template.styles[styleKey as keyof typeof template.styles];
+    console.log(`Styles for ${styleKey}:`, styles);
+    
     const styleString = styles 
       ? Object.entries(styles)
-          .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value} !important`)
+          .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value}`)
           .join('; ')
       : '';
+    
+    console.log(`Generated style string: "${styleString}"`);
 
     switch (node.type) {
       case 'paragraph':
@@ -67,15 +90,9 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
         return `<p style="${styleString}">${pContent}</p>`;
       
       case 'heading':
-        const level = node.attrs?.level || 1;
-        const headingStyles = template.styles[`h${level}` as keyof typeof template.styles];
-        const headingStyleString = headingStyles
-          ? Object.entries(headingStyles)
-              .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value} !important`)
-              .join('; ')
-          : '';
         const hContent = node.content?.map(renderNode).join('') || '';
-        return `<h${level} style="${headingStyleString}">${hContent}</h${level}>`;
+        const level = node.attrs?.level || 1;
+        return `<h${level} style="${styleString}">${hContent}</h${level}>`;
       
       case 'bulletList':
         const ulContent = node.content?.map(renderNode).join('') || '';
@@ -101,7 +118,7 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
   }
 
   const htmlContent = tiptapJson.content.map(renderNode).join('');
-  console.log('Generated HTML:', htmlContent);
+  console.log('Final Generated HTML:', htmlContent);
   console.log('=== End TemplateEngine Debug ===');
   return htmlContent || '<p>No content to preview</p>';
 }
