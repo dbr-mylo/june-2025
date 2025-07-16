@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Bold from '@tiptap/extension-bold'
@@ -8,16 +9,16 @@ import OrderedList from '@tiptap/extension-ordered-list'
 import ListItem from '@tiptap/extension-list-item'
 import TextAlign from '@tiptap/extension-text-align'
 import CharacterCount from '@tiptap/extension-character-count'
-import { useState, useEffect } from 'react'
 import { EditorToolbar } from './EditorToolbar'
-import { Button } from '@/components/ui/button'
+import { Button } from './ui/button'
 import { useToast } from '@/hooks/use-toast'
 
 interface EditorProps {
   className?: string
+  ref?: React.RefObject<any>
 }
 
-export const Editor = ({ className = '' }: EditorProps) => {
+export const Editor = React.forwardRef<any, EditorProps>(({ className = '' }, ref) => {
   const { toast } = useToast()
   const [isSaving, setIsSaving] = useState(false)
 
@@ -178,4 +179,6 @@ export const Editor = ({ className = '' }: EditorProps) => {
       </div>
     </div>
   )
-}
+});
+
+Editor.displayName = 'Editor';
