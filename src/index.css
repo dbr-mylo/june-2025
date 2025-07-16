@@ -172,47 +172,20 @@
   text-decoration: underline;
 }
 
-/* Template Preview Isolation - Surgical reset that preserves inline styles */
+/* Template Preview Isolation - Minimal container that preserves inline styles */
 .template-preview-isolation {
-  /* Block global font inheritance */
-  font-family: serif; /* Default fallback, inline styles will override */
-  font-size: 16px; /* Default fallback, inline styles will override */
-  line-height: 1.5; /* Default fallback, inline styles will override */
-  color: black; /* Default fallback, inline styles will override */
-  
-  /* Reset layout properties */
+  /* Only layout and container styles - NO typography */
   background: white;
   margin: 0;
   padding: 0;
   border: none;
   box-sizing: border-box;
-  
-  /* Block Tailwind/ProseMirror inheritance */
-  text-decoration: none;
-  font-weight: normal;
-  font-style: normal;
+  width: 100%;
+  display: block;
 }
 
 .template-preview-content {
+  /* Minimal container - inline styles control everything else */
   display: block;
   width: 100%;
-  /* Preserve inline styles by not using 'all: unset' */
-}
-
-/* Block global styles from affecting preview content */
-.template-preview-content h1,
-.template-preview-content h2,
-.template-preview-content h3,
-.template-preview-content p,
-.template-preview-content ul,
-.template-preview-content ol,
-.template-preview-content li {
-  /* Reset margins/padding but preserve inline styles */
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  font-weight: normal;
-  font-style: normal;
-  /* Inline styles will override these defaults */
 }
