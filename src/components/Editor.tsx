@@ -57,19 +57,17 @@ export const Editor = ({ className = '' }: EditorProps) => {
         class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[400px] p-4',
       },
       handleKeyDown: (view, event) => {
-        const { state, dispatch } = view
-        
-        // Handle Tab for list indentation
+        // Handle Tab for list indentation - only when cursor is in a list
         if (event.key === 'Tab' && !event.shiftKey) {
-          if (editor?.commands.sinkListItem('listItem')) {
+          if (editor?.isActive('listItem') && editor?.commands.sinkListItem('listItem')) {
             event.preventDefault()
             return true
           }
         }
         
-        // Handle Shift+Tab for list outdenting
+        // Handle Shift+Tab for list outdenting - only when cursor is in a list
         if (event.key === 'Tab' && event.shiftKey) {
-          if (editor?.commands.liftListItem('listItem')) {
+          if (editor?.isActive('listItem') && editor?.commands.liftListItem('listItem')) {
             event.preventDefault()
             return true
           }
@@ -102,7 +100,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
       const documentData = {
         content,
         lastModified: new Date().toISOString(),
-        wordCount: editor.storage.characterCount.words || 0,
+        wordCount: editor.storage.characterCount.words() || 0,
       }
 
       localStorage.setItem('mylo-document', JSON.stringify(documentData))
@@ -138,7 +136,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
           <EditorToolbar editor={editor} />
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">
-              {editor.storage.characterCount.words || 0} words
+              {editor.storage.characterCount.words() || 0} words
             </span>
             <Button 
               onClick={handleSave}
