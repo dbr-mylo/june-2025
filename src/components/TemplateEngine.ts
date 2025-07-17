@@ -76,17 +76,28 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
     const styles = template.styles[styleKey as keyof typeof template.styles];
     console.log(`Styles for ${styleKey}:`, styles);
     
-    const styleString = styles 
+const styleString = styles
   ? Object.entries(styles)
       .map(([key, value]) => {
         const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
-        const cssValue = typeof value === 'string' && value.includes(',') 
-          ? `"${value}"` 
-          : value;
+        let cssValue = String(value);
+
+        // Wrap font-family values in quotes only if they include spaces or commas
+        if (cssKey === 'font-family') {
+          // split by comma, trim spaces and remove quotes
+          const families = cssValue.split(',').map(f => {
+            const trimmed = f.trim().replace(/^["']|["']$/g, '');
+            return /\s/.test(trimmed) ? `"${trimmed}"` : trimmed;
+          });
+          cssValue = families.join(', ');
+        }
+
+
         return `${cssKey}: ${cssValue} !important`;
       })
       .join('; ')
   : '';
+
     
     console.log(`Generated style string: "${styleString}"`);
 
