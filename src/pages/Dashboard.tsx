@@ -8,14 +8,9 @@ const Dashboard = () => {
     navigate(`/editor/${id}`);
   };
 
-  const handleCreateNew = () => {
-    navigate('/editor');
-  };
-
   return (
     <DashboardComponent
       onOpenDocument={handleOpenDocument}
-      onCreateNew={handleCreateNew}
     />
   );
 };

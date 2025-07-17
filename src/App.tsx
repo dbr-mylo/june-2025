@@ -19,7 +19,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/editor" element={<DocumentEditor />} />
+          <Route path="/editor" element={<DocumentEditor key="new" />} />
           <Route path="/editor/:documentId" element={<DocumentEditor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
