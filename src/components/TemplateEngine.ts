@@ -3,31 +3,31 @@ export const TEMPLATES = {
   'Modern Report': {
     name: 'Modern Report',
     styles: {
-      h1: { fontFamily: 'Lato, sans-serif', fontSize: '36px', color: '#2563eb', fontWeight: 'bold' },
-      h2: { fontFamily: 'Lato, sans-serif', fontSize: '28px', color: '#2563eb', fontWeight: 'bold' },
-      p: { fontFamily: 'Lato, sans-serif', fontSize: '18px', lineHeight: '1.6', color: '#374151' },
-      ul: { fontFamily: 'Lato, sans-serif', fontSize: '18px', lineHeight: '1.6', color: '#374151' },
-      ol: { fontFamily: 'Lato, sans-serif', fontSize: '18px', lineHeight: '1.6', color: '#374151' }
+      h1: { fontFamily: 'Roboto, sans-serif', fontSize: '36px', color: '#2563eb', fontWeight: 'bold' },
+      h2: { fontFamily: 'Roboto, sans-serif', fontSize: '28px', color: '#2563eb', fontWeight: 'bold' },
+      p: { fontFamily: 'Roboto, sans-serif', fontSize: '18px', lineHeight: '1.6', color: '#374151' },
+      ul: { fontFamily: 'Roboto, sans-serif', fontSize: '18px', lineHeight: '1.6', color: '#374151' },
+      ol: { fontFamily: 'Roboto, sans-serif', fontSize: '18px', lineHeight: '1.6', color: '#374151' }
     }
   },
   'Corporate Letterhead': {
     name: 'Corporate Letterhead',
     styles: {
-      h1: { fontFamily: 'Helvetica, sans-serif', fontSize: '32px', color: '#dc2626', fontWeight: 'bold' },
-      h2: { fontFamily: 'Helvetica, sans-serif', fontSize: '24px', color: '#dc2626', fontWeight: 'bold' },
-      p: { fontFamily: 'Helvetica, sans-serif', fontSize: '16px', lineHeight: '1.3', color: '#1f2937' },
-      ul: { fontFamily: 'Helvetica, sans-serif', fontSize: '16px', lineHeight: '1.3', color: '#1f2937' },
-      ol: { fontFamily: 'Helvetica, sans-serif', fontSize: '16px', lineHeight: '1.3', color: '#1f2937' }
+      h1: { fontFamily: 'Avenir, sans-serif', fontSize: '32px', color: '#dc2626', fontWeight: 'bold' },
+      h2: { fontFamily: 'Avenir, sans-serif', fontSize: '24px', color: '#dc2626', fontWeight: 'bold' },
+      p: { fontFamily: 'Avenir, sans-serif', fontSize: '16px', lineHeight: '1.3', color: '#1f2937' },
+      ul: { fontFamily: 'Avenir, sans-serif', fontSize: '16px', lineHeight: '1.3', color: '#1f2937' },
+      ol: { fontFamily: 'Avenir, sans-serif', fontSize: '16px', lineHeight: '1.3', color: '#1f2937' }
     }
   },
   'Academic Paper': {
     name: 'Academic Paper',
     styles: {
-      h1: { fontFamily: '"Times New Roman", serif', fontSize: '28px', color: '#059669', fontWeight: 'bold' },
-      h2: { fontFamily: '"Times New Roman", serif', fontSize: '22px', color: '#059669', fontWeight: 'bold' },
-      p: { fontFamily: '"Times New Roman", serif', fontSize: '14px', lineHeight: '2.0', color: '#111827' },
-      ul: { fontFamily: '"Times New Roman", serif', fontSize: '14px', lineHeight: '2.0', color: '#111827' },
-      ol: { fontFamily: '"Times New Roman", serif', fontSize: '14px', lineHeight: '2.0', color: '#111827' }
+      h1: { fontFamily: 'Georgia, serif', fontSize: '28px', color: '#059669', fontWeight: 'bold' },
+      h2: { fontFamily: 'Georgia, serif', fontSize: '22px', color: '#059669', fontWeight: 'bold' },
+      p: { fontFamily: 'Georgia, serif', fontSize: '14px', lineHeight: '2.0', color: '#111827' },
+      ul: { fontFamily: 'Georgia, serif', fontSize: '14px', lineHeight: '2.0', color: '#111827' },
+      ol: { fontFamily: 'Georgia, serif', fontSize: '14px', lineHeight: '2.0', color: '#111827' }
     }
   }
 } as const;
@@ -80,22 +80,22 @@ const styleString = styles
   ? Object.entries(styles)
       .map(([key, value]) => {
         const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
-        let cssValue = String(value).trim().replace(/^["']|["']$/g, ''); // ← 1️⃣ strip
+        let cssValue = String(value).trim().replace(/^["']|["']$/g, '');
 
         if (cssKey === 'font-family') {
           cssValue = cssValue
             .split(',')
             .map(f => {
               const t = f.trim();
-              return /\s/.test(t) ? `"${t}"` : t;       // ← 2️⃣ quote only if space
+              return /\s/.test(t) ? `"${t}"` : t;
             })
             .join(', ');
         }
-
-        return `${cssKey}: ${cssValue} !important`;     // ; will be added next line
+        return `${cssKey}: ${cssValue} !important`;
       })
-      .join('; ') + ';'                                 // ← 3️⃣ final semicolon
+      .join('; ') + ';'
   : '';
+
 
     console.log(`Generated style string: "${styleString}"`);
 
