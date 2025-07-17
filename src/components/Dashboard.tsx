@@ -103,16 +103,37 @@ export const Dashboard = ({ onOpenDocument }: DashboardProps) => {
   const MAX_HEIGHT = 500;
 
   const handleCreateNew = async () => {
-    // Create a new document and navigate to its editor
-    const result = await DocumentService.saveDocument(
-      null,
-      'Untitled Document', 
-      'Modern Report',
-      JSON.stringify({ type: 'doc', content: [] })
-    );
+    try {
+      // Create a new document and navigate to its editor
+      const result = await DocumentService.saveDocument(
+        null,
+        'Untitled Document', 
+        'Modern Report',
+        JSON.stringify({ type: 'doc', content: [] })
+      );
 
-    if (result.success && result.document) {
-      navigate(`/editor/${result.document.id}`);
+      if (result.success && result.document) {
+        navigate(`/editor/${result.document.id}`);
+        if (result.error) {
+          toast({
+            title: "Document created locally",
+            description: result.error,
+            variant: "default",
+          });
+        }
+      } else {
+        toast({
+          title: "Failed to create document",
+          description: result.error || "Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Failed to create document",
+        description: "An unexpected error occurred.",
+        variant: "destructive",
+      });
     }
   };
 

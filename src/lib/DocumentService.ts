@@ -91,11 +91,26 @@ export class DocumentService {
         needs_sync: true,
       };
       
+      // Store both as pending save and in main local storage
       this.storePendingSave(localDoc);
+      this.storeLocalDocument(localDoc);
+      
+      // Convert to DocumentMetadata format for return
+      const document: DocumentMetadata = {
+        id: localDoc.id,
+        title: localDoc.title,
+        template_id: localDoc.template_id,
+        content: localDoc.content,
+        owner_id: getCurrentUserId(),
+        created_at: now,
+        updated_at: now,
+        is_deleted: false,
+      };
       
       return { 
-        success: false, 
-        error: 'Save failed. Document stored locally and will sync when connection is restored.' 
+        success: true, 
+        document,
+        error: 'Document stored locally and will sync when connection is restored.' 
       };
     }
   }
@@ -261,6 +276,25 @@ export class DocumentService {
       this.clearPendingSave(id);
     } catch (error) {
       console.error('Failed to remove local document:', error);
+    }
+  }
+
+  // Store document in main localStorage
+  private static storeLocalDocument(document: LocalDocument): void {
+    try {
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const localDocs: LocalDocument[] = stored ? JSON.parse(stored) : [];
+      
+      const existingIndex = localDocs.findIndex(doc => doc.id === document.id);
+      if (existingIndex >= 0) {
+        localDocs[existingIndex] = document;
+      } else {
+        localDocs.push(document);
+      }
+      
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localDocs));
+    } catch (error) {
+      console.error('Failed to store local document:', error);
     }
   }
 
