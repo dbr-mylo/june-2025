@@ -92,23 +92,6 @@ export function Sidebar({ className }: SidebarProps) {
             </div>
           ))}
         </div>
-
-        {/* Folders Section */}
-        <div className="mt-6">
-          <div className="px-3 py-2 text-xs font-medium text-muted-foreground uppercase tracking-wide">
-            Folders
-          </div>
-          <div className="space-y-1 mt-2">
-            <div className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground/60">
-              <Folder className="h-4 w-4" />
-              Marketing
-            </div>
-            <div className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground/60">
-              <Folder className="h-4 w-4" />
-              Reports
-            </div>
-          </div>
-        </div>
       </nav>
     </div>
   );
