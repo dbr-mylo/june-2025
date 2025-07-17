@@ -25,20 +25,6 @@ export function Sidebar({ className }: SidebarProps) {
       icon: FileText,
       href: "/dashboard",
       isActive: isActiveRoute('/dashboard')
-    },
-    {
-      title: "Templates",
-      icon: Folder,
-      href: "#",
-      isActive: false,
-      disabled: true
-    },
-    {
-      title: "Trash",
-      icon: Trash2,
-      href: "#",
-      isActive: false,
-      disabled: true
     }
   ];
 
@@ -69,27 +55,18 @@ export function Sidebar({ className }: SidebarProps) {
       <nav className="flex-1 p-4">
         <div className="space-y-1">
           {navItems.map((item) => (
-            <div key={item.title}>
-              {item.disabled ? (
-                <div className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground/60 cursor-not-allowed">
-                  <item.icon className="h-4 w-4" />
-                  {item.title}
-                </div>
-              ) : (
-                <Link to={item.href}>
-                  <Button
-                    variant={item.isActive ? "secondary" : "ghost"}
-                    className={cn(
-                      "w-full justify-start gap-3",
-                      item.isActive && "bg-secondary text-secondary-foreground"
-                    )}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    {item.title}
-                  </Button>
-                </Link>
-              )}
-            </div>
+            <Link key={item.title} to={item.href}>
+              <Button
+                variant={item.isActive ? "secondary" : "ghost"}
+                className={cn(
+                  "w-full justify-start gap-3",
+                  item.isActive && "bg-secondary text-secondary-foreground"
+                )}
+              >
+                <item.icon className="h-4 w-4" />
+                {item.title}
+              </Button>
+            </Link>
           ))}
         </div>
       </nav>
