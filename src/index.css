@@ -189,3 +189,20 @@
   display: block;
   width: 100%;
 }
+
+/* ----------  Preview list spacing  ---------- */
+.template-preview-content ul,
+.template-preview-content ol {
+  /* put the list itself 1 rem in from the left edge */
+  margin-left: 1rem;        /* outer gap - controls first level indent */
+  padding-left: 1.25rem;    /* inner gap - lets markers sit outside text */
+}
+
+/* every nested list should step in again */
+.template-preview-content ul ul,
+.template-preview-content ol ol,
+.template-preview-content ul ol,
+.template-preview-content ol ul {
+  margin-left: 1rem;        /* you can tweak these separately if you like */
+  padding-left: 1.25rem;
+}
