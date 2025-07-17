@@ -76,24 +76,26 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
     const styles = template.styles[styleKey as keyof typeof template.styles];
     console.log(`Styles for ${styleKey}:`, styles);
     
-    const styleString = styles
-      ? Object.entries(styles)
-          .map(([key, value]) => {
-            const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
-            let cssValue = String(value);
+const styleString = styles
+  ? Object.entries(styles)
+      .map(([key, value]) => {
+        const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+        let cssValue = String(value).trim().replace(/^["']|["']$/g, ''); // ← 1️⃣ strip
 
-            if (cssKey === 'font-family') {
-              const families = cssValue.split(',').map(f => {
-                const trimmed = f.trim().replace(/^["']|["']$/g, '');
-                return /\s/.test(trimmed) ? `"${trimmed}"` : trimmed;
-              });
-              cssValue = families.join(', ');
-            }
-            return `${cssKey}: ${cssValue} !important`;
-          })
-          .join('; ') + ';'   // ensure final semicolon
-      : '';
+        if (cssKey === 'font-family') {
+          cssValue = cssValue
+            .split(',')
+            .map(f => {
+              const t = f.trim();
+              return /\s/.test(t) ? `"${t}"` : t;       // ← 2️⃣ quote only if space
+            })
+            .join(', ');
+        }
 
+        return `${cssKey}: ${cssValue} !important`;     // ; will be added next line
+      })
+      .join('; ') + ';'                                 // ← 3️⃣ final semicolon
+  : '';
 
     console.log(`Generated style string: "${styleString}"`);
 
