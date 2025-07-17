@@ -1,6 +1,7 @@
 import { supabase, getCurrentUserId } from './supabase';
 import { DocumentMetadata, LocalDocument } from '../types/document';
-import { TemplateName } from '../components/TemplateEngine';
+
+export type TemplateName = 'letter' | 'fax' | 'memo' | 'invoice' | 'Modern Report' | 'Corporate Letterhead' | 'Academic Paper';
 
 const LOCAL_STORAGE_KEY = 'mylo_documents';
 const LOCAL_PENDING_KEY = 'mylo_pending_saves';
