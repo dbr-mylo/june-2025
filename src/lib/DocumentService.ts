@@ -49,6 +49,7 @@ export class DocumentService {
       let result;
       if (id) {
         // Update existing document
+        console.log('Updating document in Supabase:', id);
         const { data, error } = await supabase
           .from('documents')
           .update(documentData)
@@ -57,10 +58,14 @@ export class DocumentService {
           .select()
           .single();
         
-        if (error) throw error;
+        if (error) {
+          console.error('Supabase update error:', error);
+          throw error;
+        }
         result = data;
       } else {
-        // Create new document
+        // Create new document - FORCE Supabase insert
+        console.log('Creating new document in Supabase with data:', documentData);
         const { data, error } = await supabase
           .from('documents')
           .insert({
@@ -71,48 +76,67 @@ export class DocumentService {
           .select()
           .single();
         
-        if (error) throw error;
+        if (error) {
+          console.error('Supabase insert error:', error);
+          throw error;
+        }
         result = data;
       }
 
+      console.log('Supabase operation successful:', result);
       // Clear any pending saves for this document
       this.clearPendingSave(result.id);
       
       return { success: true, document: result };
     } catch (error) {
-      console.error('Failed to save to Supabase:', error);
+      console.error('CRITICAL: Supabase operation failed, falling back to localStorage:', error);
       
-      // Store in localStorage as fallback
-      const localDoc: LocalDocument = {
-        id: id || `local_${Date.now()}`,
-        title,
-        template_id: templateId,
-        content,
-        last_saved: now,
-        needs_sync: true,
-      };
-      
-      // Store both as pending save and in main local storage
-      this.storePendingSave(localDoc);
-      this.storeLocalDocument(localDoc);
-      
-      // Convert to DocumentMetadata format for return
-      const document: DocumentMetadata = {
-        id: localDoc.id,
-        title: localDoc.title,
-        template_id: localDoc.template_id,
-        content: localDoc.content,
-        owner_id: getCurrentUserId(),
-        created_at: now,
-        updated_at: now,
-        is_deleted: false,
-      };
-      
-      return { 
-        success: true, 
-        document,
-        error: 'Document stored locally and will sync when connection is restored.' 
-      };
+      // Only fall back to localStorage for network errors, not RLS or other DB errors
+      if (error instanceof Error && (
+        error.message.includes('network') || 
+        error.message.includes('Failed to fetch') ||
+        error.message.includes('fetch')
+      )) {
+        console.log('Network error detected, using localStorage fallback');
+        
+        // Store in localStorage as fallback
+        const localDoc: LocalDocument = {
+          id: id || `local_${Date.now()}`,
+          title,
+          template_id: templateId,
+          content,
+          last_saved: now,
+          needs_sync: true,
+        };
+        
+        // Store both as pending save and in main local storage
+        this.storePendingSave(localDoc);
+        this.storeLocalDocument(localDoc);
+        
+        // Convert to DocumentMetadata format for return
+        const document: DocumentMetadata = {
+          id: localDoc.id,
+          title: localDoc.title,
+          template_id: localDoc.template_id,
+          content: localDoc.content,
+          owner_id: getCurrentUserId(),
+          created_at: now,
+          updated_at: now,
+          is_deleted: false,
+        };
+        
+        return { 
+          success: true, 
+          document,
+          error: 'Document stored locally and will sync when connection is restored.' 
+        };
+      } else {
+        // For database errors (RLS, validation, etc), don't fall back - return the error
+        return { 
+          success: false, 
+          error: `Database error: ${error instanceof Error ? error.message : 'Unknown error'}` 
+        };
+      }
     }
   }
 
