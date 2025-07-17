@@ -78,7 +78,7 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
     
     const styleString = styles 
       ? Object.entries(styles)
-          .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value}`)
+          .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value} !important`)
           .join('; ')
       : '';
     
