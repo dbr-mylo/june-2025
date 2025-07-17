@@ -77,10 +77,16 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
     console.log(`Styles for ${styleKey}:`, styles);
     
     const styleString = styles 
-      ? Object.entries(styles)
-          .map(([key, value]) => `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value} !important`)
-          .join('; ')
-      : '';
+  ? Object.entries(styles)
+      .map(([key, value]) => {
+        const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+        const cssValue = typeof value === 'string' && value.includes(',') 
+          ? `"${value}"` 
+          : value;
+        return `${cssKey}: ${cssValue} !important`;
+      })
+      .join('; ')
+  : '';
     
     console.log(`Generated style string: "${styleString}"`);
 
