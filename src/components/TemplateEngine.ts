@@ -76,53 +76,51 @@ export function applyTemplateToContent(tiptapJson: any, templateName: TemplateNa
     const styles = template.styles[styleKey as keyof typeof template.styles];
     console.log(`Styles for ${styleKey}:`, styles);
     
-const styleString = styles
-  ? Object.entries(styles)
-      .map(([key, value]) => {
-        const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
-        let cssValue = String(value);
+    const styleString = styles
+      ? Object.entries(styles)
+          .map(([key, value]) => {
+            const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+            let cssValue = String(value);
 
-        // Wrap font-family values in quotes only if they include spaces or commas
-        if (cssKey === 'font-family') {
-          // split by comma, trim spaces and remove quotes
-          const families = cssValue.split(',').map(f => {
-            const trimmed = f.trim().replace(/^["']|["']$/g, '');
-            return /\s/.test(trimmed) ? `"${trimmed}"` : trimmed;
-          });
-          cssValue = families.join(', ');
-        }
+            if (cssKey === 'font-family') {
+              const families = cssValue.split(',').map(f => {
+                const trimmed = f.trim().replace(/^["']|["']$/g, '');
+                return /\s/.test(trimmed) ? `"${trimmed}"` : trimmed;
+              });
+              cssValue = families.join(', ');
+            }
+            return `${cssKey}: ${cssValue} !important`;
+          })
+          .join('; ') + ';'   // ensure final semicolon
+      : '';
 
 
-        return `${cssKey}: ${cssValue} !important`;
-      })
-      .join('; ')
-  : '';
-
-    
     console.log(`Generated style string: "${styleString}"`);
 
     switch (node.type) {
       case 'paragraph':
         const pContent = node.content?.map(renderNode).join('') || '';
-        return `<p style="${styleString}">${pContent}</p>`;
+        return `<p style='${styleString}'>${pContent}</p>`;
+
       
       case 'heading':
         const hContent = node.content?.map(renderNode).join('') || '';
         const level = node.attrs?.level || 1;
-        return `<h${level} style="${styleString}">${hContent}</h${level}>`;
+        return `<h${level} style='${styleString}'>${hContent}</h${level}>`;
       
       case 'bulletList':
         const ulContent = node.content?.map(renderNode).join('') || '';
-        return `<ul style="${styleString}">${ulContent}</ul>`;
+        return `<ul style='${styleString}'>${ulContent}</ul>`;
+
       
       case 'orderedList':
         const olContent = node.content?.map(renderNode).join('') || '';
-        return `<ol style="${styleString}">${olContent}</ol>`;
-      
+        return `<ol style='${styleString}'>${olContent}</ol>`;
+
       case 'listItem':
         const liContent = node.content?.map(renderNode).join('') || '';
-        return `<li>${liContent}</li>`;
-      
+        return `<li style='${styleString}'>${liContent}</li>`;
+
       case 'text':
         return node.text || '';
       
