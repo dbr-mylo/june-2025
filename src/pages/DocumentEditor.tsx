@@ -26,6 +26,7 @@ const DocumentEditor = () => {
     local: any;
     supabase: DocumentMetadata;
   } | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const editorRef = useRef<any>(null);
 
   useEffect(() => {
@@ -37,6 +38,7 @@ const DocumentEditor = () => {
   const loadDocument = async (id: string) => {
     console.log('DocumentEditor: Loading document with id:', id);
     setLoading(true);
+    setLoadError(null);
     try {
       const result = await DocumentService.loadDocument(id);
       console.log('DocumentEditor: DocumentService.loadDocument result:', result);
@@ -49,27 +51,22 @@ const DocumentEditor = () => {
         });
         setShowConflictDialog(true);
       } else if (result.document) {
-        console.log('DocumentEditor: Applying document data');
+        console.log('DocumentEditor: Successfully loaded document, applying data');
         applyDocumentData(result.document);
       } else {
-        console.log('DocumentEditor: No document found, showing error and navigating to dashboard');
-        toast({
-          title: "Document not found",
-          description: result.error || "The requested document could not be loaded. It may have been deleted or you may not have permission to access it.",
-          variant: "destructive",
-        });
-        navigate('/dashboard');
+        console.log('DocumentEditor: No document found, setting error state');
+        const errorMessage = result.error || "This document could not be loaded. It may not exist or you may not have access.";
+        setLoadError(errorMessage);
+        console.log('DocumentEditor: Load error set to:', errorMessage);
       }
     } catch (error) {
       console.error('DocumentEditor: Failed to load document:', error);
-      toast({
-        title: "Failed to load document",
-        description: "Please check your connection and try again. If the problem persists, the document may not exist.",
-        variant: "destructive",
-      });
-      navigate('/dashboard');
+      const errorMessage = "Failed to load document. Please check your connection and try again.";
+      setLoadError(errorMessage);
+      console.log('DocumentEditor: Load error set to:', errorMessage);
     } finally {
       setLoading(false);
+      console.log('DocumentEditor: Loading finished, loading state set to false');
     }
   };
 
@@ -202,6 +199,7 @@ const DocumentEditor = () => {
   };
 
   if (loading) {
+    console.log('DocumentEditor: Rendering loading state');
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -212,14 +210,56 @@ const DocumentEditor = () => {
     );
   }
 
+  if (loadError) {
+    console.log('DocumentEditor: Rendering error state:', loadError);
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <div className="mb-4">
+            <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-destructive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.996-.833-2.464 0L3.349 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+          </div>
+          <h2 className="text-xl font-semibold text-foreground mb-2">Document Not Found</h2>
+          <p className="text-muted-foreground mb-4">{loadError}</p>
+          <button 
+            onClick={() => navigate('/dashboard')}
+            className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+          >
+            Return to Dashboard
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!document) {
+    console.log('DocumentEditor: No document loaded and no error, rendering fallback');
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-lg text-foreground mb-2">Document could not be loaded</p>
+          <p className="text-muted-foreground">The document may not exist or you may not have permission to access it.</p>
+        </div>
+      </div>
+    );
+  }
+
+  console.log('DocumentEditor: Rendering editor with document:', document);
+  console.log('DocumentEditor: Document title:', documentTitle);
+  console.log('DocumentEditor: Document template:', selectedTemplate);
+  console.log('DocumentEditor: Document content type:', typeof document?.content);
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <EditorHeader
-        title={documentTitle}
+        title={documentTitle || 'Untitled Document'}
         onTitleChange={setDocumentTitle}
-        templateName={selectedTemplate}
-        lastSaved={lastSaved}
+        templateName={selectedTemplate || 'Modern Report'}
+        lastSaved={lastSaved || '—'}
         saveStatus={saveStatus}
         onSave={handleSave}
         onRefreshPreview={handleRefreshPreview}
@@ -232,7 +272,7 @@ const DocumentEditor = () => {
           <div className="mb-4">
             <h3 className="font-medium text-foreground mb-2">Template</h3>
             <TemplateSelector 
-              value={selectedTemplate}
+              value={selectedTemplate || 'Modern Report'}
               onValueChange={setSelectedTemplate}
             />
           </div>
@@ -246,9 +286,9 @@ const DocumentEditor = () => {
               className="h-full" 
               ref={editorRef}
               documentId={documentId}
-              initialTitle={documentTitle}
-              initialContent={document?.content}
-              templateId={selectedTemplate}
+              initialTitle={documentTitle || 'Untitled Document'}
+              initialContent={document?.content || { type: "doc", content: [] }}
+              templateId={selectedTemplate || 'Modern Report'}
               onDocumentSaved={handleDocumentSaved}
             />
           </div>
@@ -257,7 +297,7 @@ const DocumentEditor = () => {
           <div>
             <PreviewRenderer 
               htmlContent={previewContent} 
-              templateName={selectedTemplate} 
+              templateName={selectedTemplate || 'Modern Report'} 
             />
           </div>
         </div>
