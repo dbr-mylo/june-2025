@@ -24,7 +24,36 @@ export const PreviewRenderer = ({ content, template, className = '' }: PreviewRe
     }
   }
 
-  const renderNode = (node: any, index: number): React.ReactNode => {
+  // Convert CSS properties to React-compatible camelCase
+  const convertStyleToReact = (style: any) => {
+    const reactStyle: any = {}
+    Object.entries(style).forEach(([key, value]) => {
+      switch (key) {
+        case 'font-family':
+          reactStyle.fontFamily = value
+          break
+        case 'font-size':
+          reactStyle.fontSize = value
+          break
+        case 'font-weight':
+          reactStyle.fontWeight = value
+          break
+        case 'line-height':
+          reactStyle.lineHeight = value
+          break
+        case 'list-style-type':
+          reactStyle.listStyleType = value
+          break
+        default:
+          // Convert kebab-case to camelCase for other properties
+          const camelKey = key.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
+          reactStyle[camelKey] = value
+      }
+    })
+    return reactStyle
+  }
+
+  const renderNode = (node: any, index: number, nestLevel: number = 0): React.ReactNode => {
     if (!node) return null
 
     const nodeType = node.type
@@ -34,66 +63,82 @@ export const PreviewRenderer = ({ content, template, className = '' }: PreviewRe
         const level = node.attrs?.level || 1
         const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements
         const styleKey = getTemplateStyleKey(nodeType, level)
-        const headingStyle = template.styles[styleKey] || template.styles['h1'] || {}
+        const rawHeadingStyle = template.styles[styleKey] || template.styles['h1'] || {}
+        const headingStyle = convertStyleToReact(rawHeadingStyle)
         
-        console.log(`📝 TipTap node: ${nodeType} (level ${level}) - Style key: ${styleKey}, Resolved style:`, headingStyle)
-        console.log(`🎯 Inline style string: ${Object.entries(headingStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        console.log(`📝 TipTap node: ${nodeType} (level ${level}, nestLevel: ${nestLevel}) - Style key: ${styleKey}`)
+        console.log(`🎯 Raw style:`, rawHeadingStyle)
+        console.log(`🎯 Converted React style:`, headingStyle)
         
         return (
           <HeadingTag key={index} style={headingStyle}>
-            {renderContent(node.content)}
+            {renderContent(node.content, nestLevel)}
           </HeadingTag>
         )
 
       case 'paragraph':
         const pStyleKey = getTemplateStyleKey(nodeType)
-        const pStyle = template.styles[pStyleKey] || {}
+        const rawPStyle = template.styles[pStyleKey] || {}
+        const pStyle = convertStyleToReact(rawPStyle)
         
-        console.log(`📄 TipTap node: ${nodeType} - Style key: ${pStyleKey}, Resolved style:`, pStyle)
-        console.log(`🎯 Inline style string: ${Object.entries(pStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        console.log(`📄 TipTap node: ${nodeType} (nestLevel: ${nestLevel}) - Style key: ${pStyleKey}`)
+        console.log(`🎯 Raw style:`, rawPStyle)
+        console.log(`🎯 Converted React style:`, pStyle)
         
         return (
           <p key={index} style={pStyle}>
-            {renderContent(node.content)}
+            {renderContent(node.content, nestLevel)}
           </p>
         )
 
       case 'bulletList':
         const ulStyleKey = getTemplateStyleKey(nodeType)
-        const ulStyle = template.styles[ulStyleKey] || {}
+        const rawUlStyle = template.styles[ulStyleKey] || {}
+        const ulStyle = { 
+          ...convertStyleToReact(rawUlStyle),
+          paddingLeft: `${nestLevel * 1.5}em`
+        }
         
-        console.log(`🔸 TipTap node: ${nodeType} - Style key: ${ulStyleKey}, Resolved style:`, ulStyle)
-        console.log(`🎯 Inline style string: ${Object.entries(ulStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        console.log(`🔸 TipTap node: ${nodeType} (nestLevel: ${nestLevel}) - Style key: ${ulStyleKey}`)
+        console.log(`🎯 Raw style:`, rawUlStyle)
+        console.log(`🎯 Converted React style with indentation:`, ulStyle)
         
         return (
           <ul key={index} style={ulStyle}>
-            {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex))}
+            {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex, nestLevel + 1))}
           </ul>
         )
 
       case 'orderedList':
         const olStyleKey = getTemplateStyleKey(nodeType)
-        const olStyle = template.styles[olStyleKey] || {}
+        const rawOlStyle = template.styles[olStyleKey] || {}
+        const olStyle = { 
+          ...convertStyleToReact(rawOlStyle),
+          paddingLeft: `${nestLevel * 1.5}em`
+        }
         
-        console.log(`🔹 TipTap node: ${nodeType} - Style key: ${olStyleKey}, Resolved style:`, olStyle)
-        console.log(`🎯 Inline style string: ${Object.entries(olStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        console.log(`🔹 TipTap node: ${nodeType} (nestLevel: ${nestLevel}) - Style key: ${olStyleKey}`)
+        console.log(`🎯 Raw style:`, rawOlStyle)
+        console.log(`🎯 Converted React style with indentation:`, olStyle)
         
         return (
           <ol key={index} style={olStyle}>
-            {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex))}
+            {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex, nestLevel + 1))}
           </ol>
         )
 
       case 'listItem':
         const liStyleKey = getTemplateStyleKey(nodeType)
-        const liStyle = template.styles[liStyleKey] || {}
+        const rawLiStyle = template.styles[liStyleKey] || {}
+        const liStyle = convertStyleToReact(rawLiStyle)
         
-        console.log(`📋 TipTap node: ${nodeType} - Style key: ${liStyleKey}, Resolved style:`, liStyle)
-        console.log(`🎯 Inline style string: ${Object.entries(liStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        console.log(`📋 TipTap node: ${nodeType} (nestLevel: ${nestLevel}) - Style key: ${liStyleKey}`)
+        console.log(`🎯 Raw style:`, rawLiStyle)
+        console.log(`🎯 Converted React style:`, liStyle)
         
         return (
           <li key={index} style={liStyle}>
-            {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex))}
+            {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex, nestLevel))}
           </li>
         )
 
@@ -122,14 +167,17 @@ export const PreviewRenderer = ({ content, template, className = '' }: PreviewRe
       default:
         // Fallback for unknown node types
         const fallbackStyleKey = getTemplateStyleKey(nodeType)
-        const fallbackStyle = template.styles[fallbackStyleKey] || {}
+        const rawFallbackStyle = template.styles[fallbackStyleKey] || {}
+        const fallbackStyle = convertStyleToReact(rawFallbackStyle)
         
-        console.log(`❓ Unknown TipTap node: ${nodeType} - Style key: ${fallbackStyleKey}, Resolved style:`, fallbackStyle)
+        console.log(`❓ Unknown TipTap node: ${nodeType} (nestLevel: ${nestLevel}) - Style key: ${fallbackStyleKey}`)
+        console.log(`🎯 Raw style:`, rawFallbackStyle)
+        console.log(`🎯 Converted React style:`, fallbackStyle)
         
         if (node.content) {
           return (
             <div key={index} style={fallbackStyle}>
-              {renderContent(node.content)}
+              {renderContent(node.content, nestLevel)}
             </div>
           )
         }
@@ -137,10 +185,10 @@ export const PreviewRenderer = ({ content, template, className = '' }: PreviewRe
     }
   }
 
-  const renderContent = (content: any[]): React.ReactNode => {
+  const renderContent = (content: any[], nestLevel: number = 0): React.ReactNode => {
     if (!content || !Array.isArray(content)) return null
     
-    return content.map((node, index) => renderNode(node, index))
+    return content.map((node, index) => renderNode(node, index, nestLevel))
   }
 
   const parseContent = () => {
