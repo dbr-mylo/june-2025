@@ -74,10 +74,23 @@ const DocumentEditor = () => {
   };
 
   const applyDocumentData = (document: DocumentMetadata) => {
+    console.log('DocumentEditor: Applying document data:', document);
     setDocument(document);
-    setDocumentTitle(document.title);
-    setSelectedTemplate(document.template_id as TemplateName);
-    setLastSaved(new Date(document.updated_at).toLocaleString());
+    setDocumentTitle(document.title || 'Untitled Document');
+    setSelectedTemplate((document.template_id as TemplateName) || 'Modern Report');
+    
+    // Safe handling of updated_at with fallback
+    if (document.updated_at) {
+      try {
+        setLastSaved(new Date(document.updated_at).toLocaleString());
+      } catch (error) {
+        console.error('Invalid updated_at format:', document.updated_at);
+        setLastSaved('—');
+      }
+    } else {
+      console.log('No updated_at found, using fallback');
+      setLastSaved('—');
+    }
     
     if (editorRef.current && document.content) {
       try {
@@ -88,12 +101,20 @@ const DocumentEditor = () => {
         handleRefreshPreview();
       } catch (error) {
         console.error('Failed to parse document content:', error);
+        // Set empty content if parsing fails
+        const emptyContent = { type: "doc", content: [] };
+        editorRef.current.commands.setContent(emptyContent);
         toast({
           title: "Content loading warning",
-          description: "Document content may not display correctly.",
+          description: "Document content may not display correctly. Starting with empty document.",
           variant: "destructive",
         });
       }
+    } else if (editorRef.current) {
+      // Set empty content if no content exists
+      const emptyContent = { type: "doc", content: [] };
+      editorRef.current.commands.setContent(emptyContent);
+      handleRefreshPreview();
     }
   };
 
