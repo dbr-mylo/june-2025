@@ -74,7 +74,9 @@ const DocumentEditor = () => {
     console.log('DocumentEditor: Applying document data:', document);
     setDocument(document);
     setDocumentTitle(document.title || 'Untitled Document');
-    setSelectedTemplate((document.template_id as TemplateName) || 'Modern Report');
+    const selectedTemplate = (document?.template_id as TemplateName) ?? 'Modern Report';
+    setSelectedTemplate(selectedTemplate);
+
     
     // Safe handling of updated_at with fallback
     if (document.updated_at) {
