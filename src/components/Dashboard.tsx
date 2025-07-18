@@ -77,7 +77,7 @@ const DocumentRow = ({ index, style, data }: DocumentRowProps) => {
         
         {/* Last Edited Date */}
         <div className="flex items-center text-sm text-muted-foreground">
-          {formatDate(document.updated_at)}
+          {document.updated_at ? formatDate(document.updated_at) : "—"}
         </div>
         
         {/* Actions */}
