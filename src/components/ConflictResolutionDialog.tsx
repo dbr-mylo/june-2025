@@ -78,7 +78,7 @@ export const ConflictResolutionDialog = ({
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Clock className="h-3 w-3" />
-                    <span>Last saved: {formatDate(supabaseDocument.updated_at)}</span>
+                    <span>Last saved: {supabaseDocument?.updated_at ? formatDate(supabaseDocument.updated_at) : "—"}</span>
                   </div>
                   <div>Template: {supabaseDocument.template_id}</div>
                 </div>
