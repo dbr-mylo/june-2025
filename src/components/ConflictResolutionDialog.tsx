@@ -22,12 +22,19 @@ export const ConflictResolutionDialog = ({
 }: ConflictResolutionDialogProps) => {
   const [selectedVersion, setSelectedVersion] = useState<'supabase' | 'local' | null>(null);
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString() + ' at ' + date.toLocaleTimeString([], { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
+  const formatDate = (dateString: string | null | undefined) => {
+    if (!dateString) return '—';
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return '—';
+      return date.toLocaleDateString() + ' at ' + date.toLocaleTimeString([], { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      });
+    } catch (error) {
+      console.error('Invalid date format:', dateString);
+      return '—';
+    }
   };
 
   const handleResolve = () => {

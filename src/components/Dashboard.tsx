@@ -28,13 +28,20 @@ const DocumentRow = ({ index, style, data }: DocumentRowProps) => {
   const { documents, onOpenDocument, onDeleteDocument } = data;
   const document = documents[index];
   
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'numeric', 
-      day: 'numeric', 
-      year: '2-digit' 
-    });
+  const formatDate = (dateString: string | null | undefined) => {
+    if (!dateString) return '—';
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return '—';
+      return date.toLocaleDateString('en-US', { 
+        month: 'numeric', 
+        day: 'numeric', 
+        year: '2-digit' 
+      });
+    } catch (error) {
+      console.error('Invalid date format:', dateString);
+      return '—';
+    }
   };
 
   const handleDelete = (e: React.MouseEvent) => {

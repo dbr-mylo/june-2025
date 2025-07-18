@@ -163,12 +163,13 @@ export const Editor = React.forwardRef<any, EditorProps>(({
 
       if (result.success && result.document) {
         setSaveStatus('saved')
-        setLastSaved(result.document.updated_at)
+        const safeTimestamp = result.document.updated_at || new Date().toISOString();
+        setLastSaved(safeTimestamp)
         
         // Also save to localStorage as backup
         localStorage.setItem('mylo-document', JSON.stringify({
           content: editor.getHTML(),
-          lastModified: result.document.updated_at,
+          lastModified: safeTimestamp,
           wordCount: getWordCount(editor),
           title: documentTitle,
           templateId: templateId,
@@ -230,7 +231,13 @@ export const Editor = React.forwardRef<any, EditorProps>(({
             {lastSaved && (
               <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
                 <Clock className="h-3 w-3" />
-                <span>Last saved: {new Date(lastSaved).toLocaleString()}</span>
+                <span>Last saved: {(() => {
+                  try {
+                    return new Date(lastSaved).toLocaleString();
+                  } catch (error) {
+                    return '—';
+                  }
+                })()}</span>
               </div>
             )}
           </div>
