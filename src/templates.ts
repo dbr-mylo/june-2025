@@ -59,6 +59,12 @@ export const templates: Template[] = [
         color: '#374151',
         lineHeight: '1.6',
         listStyleType: 'decimal'
+      },
+      li: {
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '18px',
+        color: '#374151',
+        lineHeight: '1.6'
       }
     }
   },
@@ -105,6 +111,12 @@ export const templates: Template[] = [
         color: '#1f2937',
         lineHeight: '1.3',
         listStyleType: 'decimal'
+      },
+      li: {
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '16px',
+        color: '#1f2937',
+        lineHeight: '1.3'
       }
     }
   },
@@ -151,6 +163,12 @@ export const templates: Template[] = [
         color: '#111827',
         lineHeight: '2.0',
         listStyleType: 'decimal'
+      },
+      li: {
+        fontFamily: 'Georgia, serif',
+        fontSize: '14px',
+        color: '#111827',
+        lineHeight: '2.0'
       }
     }
   }

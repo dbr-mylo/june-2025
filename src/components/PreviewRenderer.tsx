@@ -12,22 +12,31 @@ export const PreviewRenderer = ({ content, template, className = '' }: PreviewRe
   console.log('🎨 PreviewRenderer - Template name:', template.name)
   console.log('📄 PreviewRenderer - Raw TipTap JSON:', content)
 
+  // Map TipTap node types to template style keys
+  const getTemplateStyleKey = (nodeType: string, level?: number): string => {
+    switch (nodeType) {
+      case 'paragraph': return 'p';
+      case 'heading': return `h${level || 1}`;
+      case 'bulletList': return 'ul';
+      case 'orderedList': return 'ol';
+      case 'listItem': return 'li';
+      default: return nodeType;
+    }
+  }
+
   const renderNode = (node: any, index: number): React.ReactNode => {
     if (!node) return null
 
     const nodeType = node.type
-    const style = template.styles[nodeType] || {}
     
-    // Debug logging for each node
-    console.log(`🔍 Node type: ${nodeType}, Style key: ${nodeType}, Resolved style:`, style)
-
     switch (nodeType) {
       case 'heading':
         const level = node.attrs?.level || 1
         const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements
-        const headingStyle = template.styles[`h${level}`] || template.styles['h1'] || {}
+        const styleKey = getTemplateStyleKey(nodeType, level)
+        const headingStyle = template.styles[styleKey] || template.styles['h1'] || {}
         
-        console.log(`📝 Heading h${level} - Style key: h${level}, Resolved style:`, headingStyle)
+        console.log(`📝 TipTap node: ${nodeType} (level ${level}) - Style key: ${styleKey}, Resolved style:`, headingStyle)
         console.log(`🎯 Inline style string: ${Object.entries(headingStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
         
         return (
@@ -37,38 +46,49 @@ export const PreviewRenderer = ({ content, template, className = '' }: PreviewRe
         )
 
       case 'paragraph':
-        console.log(`📄 Paragraph - Style key: p, Resolved style:`, style)
-        console.log(`🎯 Inline style string: ${Object.entries(style).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        const pStyleKey = getTemplateStyleKey(nodeType)
+        const pStyle = template.styles[pStyleKey] || {}
+        
+        console.log(`📄 TipTap node: ${nodeType} - Style key: ${pStyleKey}, Resolved style:`, pStyle)
+        console.log(`🎯 Inline style string: ${Object.entries(pStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
         
         return (
-          <p key={index} style={style}>
+          <p key={index} style={pStyle}>
             {renderContent(node.content)}
           </p>
         )
 
       case 'bulletList':
-        console.log(`🔸 BulletList - Style key: ul, Resolved style:`, style)
-        console.log(`🎯 Inline style string: ${Object.entries(style).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        const ulStyleKey = getTemplateStyleKey(nodeType)
+        const ulStyle = template.styles[ulStyleKey] || {}
+        
+        console.log(`🔸 TipTap node: ${nodeType} - Style key: ${ulStyleKey}, Resolved style:`, ulStyle)
+        console.log(`🎯 Inline style string: ${Object.entries(ulStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
         
         return (
-          <ul key={index} style={style}>
+          <ul key={index} style={ulStyle}>
             {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex))}
           </ul>
         )
 
       case 'orderedList':
-        console.log(`🔹 OrderedList - Style key: ol, Resolved style:`, style)
-        console.log(`🎯 Inline style string: ${Object.entries(style).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
+        const olStyleKey = getTemplateStyleKey(nodeType)
+        const olStyle = template.styles[olStyleKey] || {}
+        
+        console.log(`🔹 TipTap node: ${nodeType} - Style key: ${olStyleKey}, Resolved style:`, olStyle)
+        console.log(`🎯 Inline style string: ${Object.entries(olStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
         
         return (
-          <ol key={index} style={style}>
+          <ol key={index} style={olStyle}>
             {node.content?.map((item: any, itemIndex: number) => renderNode(item, itemIndex))}
           </ol>
         )
 
       case 'listItem':
-        const liStyle = template.styles.li || {}
-        console.log(`📋 ListItem - Style key: li, Resolved style:`, liStyle)
+        const liStyleKey = getTemplateStyleKey(nodeType)
+        const liStyle = template.styles[liStyleKey] || {}
+        
+        console.log(`📋 TipTap node: ${nodeType} - Style key: ${liStyleKey}, Resolved style:`, liStyle)
         console.log(`🎯 Inline style string: ${Object.entries(liStyle).map(([k, v]) => `${k}: ${v}`).join('; ')}`)
         
         return (
@@ -101,9 +121,14 @@ export const PreviewRenderer = ({ content, template, className = '' }: PreviewRe
 
       default:
         // Fallback for unknown node types
+        const fallbackStyleKey = getTemplateStyleKey(nodeType)
+        const fallbackStyle = template.styles[fallbackStyleKey] || {}
+        
+        console.log(`❓ Unknown TipTap node: ${nodeType} - Style key: ${fallbackStyleKey}, Resolved style:`, fallbackStyle)
+        
         if (node.content) {
           return (
-            <div key={index} style={style}>
+            <div key={index} style={fallbackStyle}>
               {renderContent(node.content)}
             </div>
           )
