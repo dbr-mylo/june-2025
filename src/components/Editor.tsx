@@ -169,8 +169,7 @@ export const Editor = ({ className = '' }: EditorProps) => {
 
   const handleTemplateSelect = (template: Template) => {
     setSelectedTemplate(template)
-    // Automatically refresh preview when template changes
-    handleRefreshPreview()
+    // Preview will only update when user clicks "Refresh Preview" button
   }
 
   if (!editor) {
