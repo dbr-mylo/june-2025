@@ -163,7 +163,7 @@ export const Editor = React.forwardRef<any, EditorProps>(({
 
       if (result.success && result.document) {
         setSaveStatus('saved')
-        const safeTimestamp = result.document.updated_at || new Date().toISOString();
+        const safeTimestamp = result.document?.updated_at ?? new Date().toISOString();
         setLastSaved(safeTimestamp)
         
         // Also save to localStorage as backup
