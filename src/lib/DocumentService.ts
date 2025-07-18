@@ -189,7 +189,7 @@ export class DocumentService {
       const localVersion = this.getLocalDocument(id);
       
       if (localVersion && localVersion.needs_sync) {
-        const supabaseTime = new Date(document.updated_at).getTime();
+        const supabaseTime = document.updated_at ? new Date(document.updated_at).getTime() : 0;
         const localTime = new Date(localVersion.last_saved).getTime();
         
         if (localTime > supabaseTime) {

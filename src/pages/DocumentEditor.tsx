@@ -126,7 +126,7 @@ const DocumentEditor = () => {
         content: conflictVersions.local.content,
         owner_id: conflictVersions.supabase.owner_id,
         created_at: conflictVersions.supabase.created_at,
-        updated_at: conflictVersions.local.last_saved || conflictVersions.supabase.updated_at,
+        updated_at: conflictVersions.local.last_saved || conflictVersions.supabase.updated_at || new Date().toISOString(),
         is_deleted: false,
       };
       applyDocumentData(localAsDocument);
