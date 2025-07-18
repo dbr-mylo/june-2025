@@ -5,6 +5,7 @@ export interface TemplateStyle {
   fontWeight?: string;
   color?: string;
   lineHeight?: string;
+  listStyleType?: string;
 }
 
 export interface Template {
@@ -19,43 +20,45 @@ export const templates: Template[] = [
     name: 'Modern Report',
     styles: {
       h1: {
-        fontFamily: 'Lato, sans-serif',
-        fontSize: '32px',
-        color: '#1a1a1a',
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '36px',
+        color: '#2563eb',
         fontWeight: 'bold',
         lineHeight: '1.2'
       },
       h2: {
-        fontFamily: 'Lato, sans-serif',
-        fontSize: '24px',
-        color: '#1a1a1a',
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '28px',
+        color: '#2563eb',
         fontWeight: 'bold',
         lineHeight: '1.3'
       },
       h3: {
-        fontFamily: 'Lato, sans-serif',
-        fontSize: '20px',
-        color: '#1a1a1a',
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '24px',
+        color: '#2563eb',
         fontWeight: 'bold',
         lineHeight: '1.4'
       },
       p: {
-        fontFamily: 'Georgia, serif',
-        fontSize: '16px',
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '18px',
         lineHeight: '1.6',
-        color: '#333333'
+        color: '#374151'
       },
       ul: {
-        fontFamily: 'Georgia, serif',
-        fontSize: '16px',
-        color: '#333333',
-        lineHeight: '1.6'
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '18px',
+        color: '#374151',
+        lineHeight: '1.6',
+        listStyleType: 'disc'
       },
       ol: {
-        fontFamily: 'Georgia, serif',
-        fontSize: '16px',
-        color: '#333333',
-        lineHeight: '1.6'
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: '18px',
+        color: '#374151',
+        lineHeight: '1.6',
+        listStyleType: 'decimal'
       }
     }
   },
@@ -63,43 +66,45 @@ export const templates: Template[] = [
     name: 'Corporate Letterhead',
     styles: {
       h1: {
-        fontFamily: 'Helvetica, Arial, sans-serif',
-        fontSize: '28px',
-        color: '#0055a5',
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '32px',
+        color: '#dc2626',
         fontWeight: 'bold',
         lineHeight: '1.2'
       },
       h2: {
-        fontFamily: 'Helvetica, Arial, sans-serif',
-        fontSize: '20px',
-        color: '#0055a5',
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '24px',
+        color: '#dc2626',
         fontWeight: 'bold',
         lineHeight: '1.3'
       },
       h3: {
-        fontFamily: 'Helvetica, Arial, sans-serif',
-        fontSize: '18px',
-        color: '#0055a5',
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '22px',
+        color: '#dc2626',
         fontWeight: 'bold',
         lineHeight: '1.4'
       },
       p: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '14px',
-        lineHeight: '1.4',
-        color: '#000000'
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '16px',
+        lineHeight: '1.3',
+        color: '#1f2937'
       },
       ul: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '14px',
-        color: '#000000',
-        lineHeight: '1.4'
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '16px',
+        color: '#1f2937',
+        lineHeight: '1.3',
+        listStyleType: 'disc'
       },
       ol: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '14px',
-        color: '#000000',
-        lineHeight: '1.4'
+        fontFamily: 'Avenir, sans-serif',
+        fontSize: '16px',
+        color: '#1f2937',
+        lineHeight: '1.3',
+        listStyleType: 'decimal'
       }
     }
   },
@@ -107,43 +112,45 @@ export const templates: Template[] = [
     name: 'Academic Paper',
     styles: {
       h1: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '24px',
-        color: '#000000',
+        fontFamily: 'Georgia, serif',
+        fontSize: '28px',
+        color: '#059669',
         fontWeight: 'bold',
         lineHeight: '1.2'
       },
       h2: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '18px',
-        color: '#000000',
+        fontFamily: 'Georgia, serif',
+        fontSize: '22px',
+        color: '#059669',
         fontWeight: 'bold',
         lineHeight: '1.3'
       },
       h3: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '16px',
-        color: '#000000',
+        fontFamily: 'Georgia, serif',
+        fontSize: '18px',
+        color: '#059669',
         fontWeight: 'bold',
         lineHeight: '1.4'
       },
       p: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '12pt',
-        lineHeight: '2',
-        color: '#000000'
+        fontFamily: 'Georgia, serif',
+        fontSize: '14px',
+        lineHeight: '2.0',
+        color: '#111827'
       },
       ul: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '12pt',
-        color: '#000000',
-        lineHeight: '2'
+        fontFamily: 'Georgia, serif',
+        fontSize: '14px',
+        color: '#111827',
+        lineHeight: '2.0',
+        listStyleType: 'disc'
       },
       ol: {
-        fontFamily: 'Times New Roman, Times, serif',
-        fontSize: '12pt',
-        color: '#000000',
-        lineHeight: '2'
+        fontFamily: 'Georgia, serif',
+        fontSize: '14px',
+        color: '#111827',
+        lineHeight: '2.0',
+        listStyleType: 'decimal'
       }
     }
   }
