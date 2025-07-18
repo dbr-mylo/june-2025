@@ -147,6 +147,8 @@ export class DocumentService {
     conflict?: boolean;
     error?: string;
   }> {
+    console.log('Loading document from Supabase:', id);
+    
     try {
       // Try to load from Supabase first
       const { data, error } = await supabase
@@ -157,37 +159,63 @@ export class DocumentService {
         .eq('is_deleted', false)
         .single();
 
-      if (error) throw error;
+      console.log('Supabase loadDocument response:', { data, error });
+
+      if (error) {
+        console.error('Supabase query error:', error);
+        throw error;
+      }
+
+      if (!data) {
+        console.log('Document not found in Supabase');
+        return { error: 'Document not found' };
+      }
+
+      console.log('Document loaded from Supabase:', data);
+
+      // Validate and provide defaults for required fields
+      const document: DocumentMetadata = {
+        id: data.id,
+        title: data.title || 'Untitled Document',
+        template_id: data.template_id || 'Modern Report',
+        content: data.content || { type: "doc", content: [] },
+        owner_id: data.owner_id,
+        created_at: data.created_at || new Date().toISOString(),
+        updated_at: data.updated_at || new Date().toISOString(),
+        is_deleted: data.is_deleted || false,
+      };
 
       // Check if there's a local version that might be newer
       const localVersion = this.getLocalDocument(id);
       
       if (localVersion && localVersion.needs_sync) {
-        const supabaseTime = new Date(data.updated_at).getTime();
+        const supabaseTime = new Date(document.updated_at).getTime();
         const localTime = new Date(localVersion.last_saved).getTime();
         
         if (localTime > supabaseTime) {
+          console.log('Local version is newer, showing conflict dialog');
           return {
-            document: data,
+            document,
             localVersion,
             conflict: true,
           };
         }
       }
 
-      return { document: data };
+      return { document };
     } catch (error) {
       console.error('Failed to load document from Supabase:', error);
       
       // Fallback to localStorage
       const localDoc = this.getLocalDocument(id);
       if (localDoc) {
+        console.log('Falling back to localStorage document');
         // Convert local document to DocumentMetadata format
         const doc: DocumentMetadata = {
           id: localDoc.id,
-          title: localDoc.title,
-          template_id: localDoc.template_id,
-          content: localDoc.content,
+          title: localDoc.title || 'Untitled Document',
+          template_id: localDoc.template_id || 'Modern Report',
+          content: localDoc.content || { type: "doc", content: [] },
           owner_id: getCurrentUserId(),
           created_at: localDoc.last_saved,
           updated_at: localDoc.last_saved,
@@ -196,7 +224,8 @@ export class DocumentService {
         return { document: doc };
       }
       
-      return { error: 'Document not found' };
+      console.log('Document not found in localStorage either');
+      return { error: `Document not found: ${error instanceof Error ? error.message : 'Unknown error'}` };
     }
   }
 

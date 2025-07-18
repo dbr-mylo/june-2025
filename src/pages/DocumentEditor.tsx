@@ -35,31 +35,36 @@ const DocumentEditor = () => {
   }, [documentId]);
 
   const loadDocument = async (id: string) => {
+    console.log('DocumentEditor: Loading document with id:', id);
     setLoading(true);
     try {
       const result = await DocumentService.loadDocument(id);
+      console.log('DocumentEditor: DocumentService.loadDocument result:', result);
       
       if (result.conflict && result.document && result.localVersion) {
+        console.log('DocumentEditor: Conflict detected, showing dialog');
         setConflictVersions({
           local: result.localVersion,
           supabase: result.document,
         });
         setShowConflictDialog(true);
       } else if (result.document) {
+        console.log('DocumentEditor: Applying document data');
         applyDocumentData(result.document);
       } else {
+        console.log('DocumentEditor: No document found, showing error and navigating to dashboard');
         toast({
           title: "Document not found",
-          description: result.error || "The requested document could not be loaded.",
+          description: result.error || "The requested document could not be loaded. It may have been deleted or you may not have permission to access it.",
           variant: "destructive",
         });
         navigate('/dashboard');
       }
     } catch (error) {
-      console.error('Failed to load document:', error);
+      console.error('DocumentEditor: Failed to load document:', error);
       toast({
         title: "Failed to load document",
-        description: "Please check your connection and try again.",
+        description: "Please check your connection and try again. If the problem persists, the document may not exist.",
         variant: "destructive",
       });
       navigate('/dashboard');
