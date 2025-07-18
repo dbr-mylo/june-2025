@@ -104,7 +104,7 @@ export const ConflictResolutionDialog = ({
                     <Clock className="h-3 w-3" />
                     <span>Last edited: {formatDate(localDocument.last_saved)}</span>
                   </div>
-                  <div>Template: {localDocument.template_id}</div>
+                  <div>Template: {localDocument?.template_id ?? 'Unknown'}</div>
                 </div>
               </CardContent>
             </Card>
