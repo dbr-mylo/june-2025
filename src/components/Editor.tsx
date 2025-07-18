@@ -1,3 +1,4 @@
+
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Bold from '@tiptap/extension-bold'
@@ -12,6 +13,11 @@ import { useState, useEffect } from 'react'
 import { EditorToolbar } from './EditorToolbar'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
+import { PreviewRenderer } from './PreviewRenderer'
+import { TemplateSelector } from './TemplateSelector'
+import { templates, Template } from '@/templates'
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable'
+import { RefreshCw } from 'lucide-react'
 
 interface EditorProps {
   className?: string
@@ -20,6 +26,8 @@ interface EditorProps {
 export const Editor = ({ className = '' }: EditorProps) => {
   const { toast } = useToast()
   const [isSaving, setIsSaving] = useState(false)
+  const [selectedTemplate, setSelectedTemplate] = useState<Template>(templates[0])
+  const [previewContent, setPreviewContent] = useState<any>(null)
 
   // Manual word count function as fallback
   const getWordCount = (editor: any) => {
@@ -104,6 +112,8 @@ export const Editor = ({ className = '' }: EditorProps) => {
       try {
         const parsedContent = JSON.parse(savedContent)
         editor.commands.setContent(parsedContent.content || '')
+        // Initial preview update
+        handleRefreshPreview()
       } catch (error) {
         console.warn('Failed to load saved content:', error)
       }
@@ -139,6 +149,30 @@ export const Editor = ({ className = '' }: EditorProps) => {
     }
   }
 
+  const handleRefreshPreview = () => {
+    if (!editor) return
+    
+    try {
+      // Get the JSON content from TipTap
+      const jsonContent = editor.getJSON()
+      console.log('Refreshing preview with content:', jsonContent)
+      setPreviewContent(jsonContent)
+    } catch (error) {
+      console.error('Error refreshing preview:', error)
+      toast({
+        title: "Preview update failed",
+        description: "Failed to update preview. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const handleTemplateSelect = (template: Template) => {
+    setSelectedTemplate(template)
+    // Automatically refresh preview when template changes
+    handleRefreshPreview()
+  }
+
   if (!editor) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -157,6 +191,19 @@ export const Editor = ({ className = '' }: EditorProps) => {
             <span className="text-sm text-muted-foreground">
               {getWordCount(editor)} words
             </span>
+            <TemplateSelector 
+              selectedTemplate={selectedTemplate}
+              onTemplateSelect={handleTemplateSelect}
+            />
+            <Button 
+              onClick={handleRefreshPreview}
+              variant="outline"
+              size="sm"
+              className="gap-1"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Refresh Preview
+            </Button>
             <Button 
               onClick={handleSave}
               disabled={isSaving}
@@ -169,12 +216,48 @@ export const Editor = ({ className = '' }: EditorProps) => {
         </div>
       </div>
 
-      {/* Editor Content */}
-      <div className="flex-1 overflow-auto">
-        <EditorContent 
-          editor={editor} 
-          className="h-full"
-        />
+      {/* Split Panel Layout */}
+      <div className="flex-1 overflow-hidden">
+        <ResizablePanelGroup direction="horizontal">
+          {/* Editor Panel */}
+          <ResizablePanel defaultSize={50} minSize={30}>
+            <div className="h-full overflow-auto">
+              <EditorContent 
+                editor={editor} 
+                className="h-full"
+              />
+            </div>
+          </ResizablePanel>
+
+          <ResizableHandle withHandle />
+
+          {/* Preview Panel */}
+          <ResizablePanel defaultSize={50} minSize={30}>
+            <div className="h-full overflow-auto bg-gray-50">
+              {previewContent ? (
+                <PreviewRenderer 
+                  content={previewContent}
+                  template={selectedTemplate}
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full">
+                  <div className="text-center text-muted-foreground">
+                    <p className="mb-2">Preview will appear here</p>
+                    <Button 
+                      onClick={handleRefreshPreview}
+                      variant="outline"
+                      size="sm"
+                      className="gap-1"
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                      Refresh Preview
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </ResizablePanel>
+        </ResizablePanelGroup>
       </div>
     </div>
   )
