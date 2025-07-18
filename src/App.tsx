@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import DocumentEditor from "./pages/DocumentEditor";
+import { NewDocumentRedirect } from "./components/NewDocumentRedirect";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,7 +20,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/editor" element={<DocumentEditor key="new" />} />
+          <Route path="/editor/new" element={<NewDocumentRedirect />} />
           <Route path="/editor/:documentId" element={<DocumentEditor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
