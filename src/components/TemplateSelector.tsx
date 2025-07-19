@@ -1,5 +1,4 @@
-
-import { templates, Template } from '@/templates'
+import { TEMPLATES, type Template } from '@/templates'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -24,7 +23,7 @@ export const TemplateSelector = ({ selectedTemplate, onTemplateSelect }: Templat
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {templates.map((template) => (
+        {Object.values(TEMPLATES).map((template) => (
           <DropdownMenuItem
             key={template.name}
             onClick={() => onTemplateSelect(template)}
