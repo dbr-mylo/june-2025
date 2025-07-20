@@ -1,3 +1,6 @@
+// DO NOT add component-tagger or lovable-tagger plugins here.
+// These were explicitly removed for architectural integrity.
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
