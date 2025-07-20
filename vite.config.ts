@@ -1,4 +1,4 @@
-// DO NOT add component-tagger or lovable-tagger plugins here.
+// DO NOT add tagger-related plugins here (e.g., L*able or component taggers).
 // These were explicitly removed for architectural integrity.
 
 import { defineConfig } from 'vite';
