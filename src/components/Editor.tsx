@@ -4,6 +4,9 @@ import StarterKit from '@tiptap/starter-kit'
 import { TEMPLATES, type TemplateName } from '@/templates'
 import { EditorToolbar } from './EditorToolbar'
 import { PreviewRenderer } from './PreviewRenderer'
+import { TemplateSelector } from './TemplateSelector'
+import { supabase } from '@/lib/supabaseClient'
+import styles from './Editor.module.css'
 
 export default function Editor() {
   const editorRef = useRef<any>(null)
@@ -37,17 +40,40 @@ export default function Editor() {
     }
   }, [editor])
 
+  const handleSave = useCallback(async () => {
+    if (!editor) return
+
+    const content = editor.getJSON()
+
+    const { data, error } = await supabase.from('documents').insert([
+      {
+        content,
+        template_id: selectedTemplate,
+        title: 'Untitled Document',
+      },
+    ])
+
+    if (error) {
+      console.error('Save failed:', error.message)
+      alert('❌ Failed to save document.')
+    } else {
+      console.log('Save successful:', data)
+      alert('✅ Document saved successfully.')
+    }
+  }, [editor, selectedTemplate])
+
   const handleTemplateSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedTemplate(event.target.value as TemplateName)
-    // Preview does NOT auto-refresh
   }
 
   return (
-    <div className="flex h-screen w-full">
-      <div className="w-1/2 border-r border-gray-200 p-4">
-        <EditorToolbar editor={editor} onRefresh={handleRefreshPreview} />
-        <EditorContent editor={editor} ref={editorRef} />
-        <div className="mt-4 flex items-center space-x-2">
+    <div className="flex flex-col h-screen w-full">
+      {/* Toolbar Row */}
+      <div className={styles.toolbarRow}>
+        <div className={styles.toolbarLeft}>
+          <EditorToolbar editor={editor} />
+        </div>
+        <div className={styles.toolbarRight}>
           <label htmlFor="template" className="text-sm font-medium">
             Template:
           </label>
@@ -65,18 +91,31 @@ export default function Editor() {
           </select>
           <button
             onClick={handleRefreshPreview}
-            className="ml-auto rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
+            className="rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
           >
             Refresh Preview
           </button>
+          <button
+            onClick={handleSave}
+            className="rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-700"
+          >
+            Save
+          </button>
         </div>
       </div>
-      <div className="w-1/2 p-4 overflow-y-auto">
-        {previewContent ? (
-          <PreviewRenderer content={previewContent} template={TEMPLATES[selectedTemplate]} />
-        ) : (
-          <p className="text-gray-400 italic">Click "Refresh Preview" to view formatted output</p>
-        )}
+
+      {/* Editor + Preview Side-by-Side */}
+      <div className="flex flex-grow w-full">
+        <div className="w-1/2 border-r border-gray-200 p-4 overflow-y-auto">
+          <EditorContent editor={editor} ref={editorRef} />
+        </div>
+        <div className="w-1/2 p-4 overflow-y-auto">
+          {previewContent ? (
+            <PreviewRenderer content={previewContent} template={TEMPLATES[selectedTemplate]} />
+          ) : (
+            <p className="text-gray-400 italic">Click "Refresh Preview" to view formatted output</p>
+          )}
+        </div>
       </div>
     </div>
   )

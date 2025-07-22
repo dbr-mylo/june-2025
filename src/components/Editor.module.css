@@ -1,0 +1,25 @@
+/* src/components/Editor.module.css */
+
+.toolbarRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 0 16px;
+}
+
+.toolbarLeft {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
