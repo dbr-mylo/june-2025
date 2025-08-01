@@ -1,0 +1,52 @@
+/* Editor.module.css */
+
+/* Reset ProseMirror editor box */
+.ProseMirror {
+  outline: none;
+  padding: 0 !important;
+  min-height: 400px;
+}
+
+/* Toolbar row lines */
+.toolbar-row {
+  border-top: 1px solid #e5e7eb; /* Tailwind gray-200 */
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Editor + Preview containers */
+.content-wrapper {
+  padding: 64px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Optional layout padding for page-like rendering */
+.document-page {
+  max-width: 816px;
+  padding: 96px 72px;
+  margin: 0 auto;
+  background: white;
+  box-sizing: border-box;
+}
+
+/* Document title field */
+.document-title-input {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827; /* Tailwind gray-900 */
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  padding: 2px 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.document-title-input:hover {
+  border-color: #d1d5db; /* Tailwind gray-300 */
+}
+
+.document-title-input:focus {
+  outline: none;
+  border-color: #3b82f6; /* Tailwind blue-500 */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
