@@ -171,3 +171,31 @@
 .ProseMirror u {
   text-decoration: underline;
 }
+
+/* ProseMirror editor styles */
+.ProseMirror {
+  padding: 0 !important;
+  /* border: 1px dashed red; remove once verified */
+}
+
+/* Tiptap Editor Layout Fix */
+.ProseMirror {
+  outline: none;
+  padding: 0 !important;
+  min-height: 400px;
+}
+
+/* Shared Layout Containers */
+.content-wrapper {
+  padding: 64px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/*.document-page {
+  max-width: 816px;
+  padding: 96px 72px;
+  margin: 0 auto;
+  background: white;
+  box-sizing: border-box;
+}*/

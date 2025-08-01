@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Shared layout container to unify Editor + Preview spacing */
+.content-wrapper {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ProseMirror editor styles */
+.ProseMirror {
+  padding: 0 !important;
+  border: 1px dashed red; /* remove once verified */
+}
+

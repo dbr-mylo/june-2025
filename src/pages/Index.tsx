@@ -1,20 +1,27 @@
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabaseClient'
 import Editor from '@/components/Editor'
+import AuthBox from '@/components/AuthBox'
 
-const Index = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-6">
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-foreground">Document Editor</h1>
-          <p className="text-sm text-muted-foreground">Create and edit your document content</p>
-        </div>
-        
-        <div className="border border-border rounded-lg overflow-hidden bg-card shadow-sm">
-          <Editor className="h-[600px]" />
-        </div>
-      </div>
-    </div>
-  );
-};
+export default function IndexPage() {
+  const [user, setUser] = useState<any>(null)
 
-export default Index;
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser()
+      setUser(data?.user || null)
+    }
+
+    getUser()
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null)
+    })
+
+    return () => {
+      listener.subscription.unsubscribe()
+    }
+  }, [])
+
+  return user ? <Editor /> : <AuthBox />
+}
