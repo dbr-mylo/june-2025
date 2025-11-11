@@ -3,6 +3,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import { TEMPLATES, type TemplateName } from '@/templates'
+import { TemplateSelector } from '@/components/TemplateSelector'
 import { EditorToolbar } from './EditorToolbar'
 import { PreviewRenderer } from './PreviewRenderer'
 import { supabase } from '@/lib/supabaseClient'
@@ -30,10 +31,7 @@ export default function Editor({
   const [title, setTitle] = useState<string>(initialTitle || 'Untitled Document')
 
   const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Underline,
-    ],
+    extensions: [StarterKit, Underline],
     content: initialContent || '',
   })
 
@@ -77,10 +75,7 @@ export default function Editor({
 
     let result
     if (documentId && documentId !== 'new') {
-      result = await supabase
-        .from('documents')
-        .update(payload)
-        .eq('id', documentId)
+      result = await supabase.from('documents').update(payload).eq('id', documentId)
     } else {
       result = await supabase.from('documents').insert([payload])
     }
@@ -98,10 +93,6 @@ export default function Editor({
       })
     }
   }, [editor, selectedTemplate, documentId, title])
-
-  const handleTemplateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTemplate(e.target.value as TemplateName)
-  }
 
   return (
     <div className="flex flex-col h-screen w-full">
@@ -121,21 +112,10 @@ export default function Editor({
           <EditorToolbar editor={editor} />
         </div>
         <div className="flex items-center gap-2">
-          <label htmlFor="template" className="text-sm font-medium">
-            Template:
-          </label>
-          <select
-            id="template"
-            className="rounded border px-2 py-1 text-sm"
-            value={selectedTemplate}
-            onChange={handleTemplateSelect}
-          >
-            {Object.keys(TEMPLATES).map((name) => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
+          <TemplateSelector
+            selected={selectedTemplate}
+            onChange={setSelectedTemplate}
+          />
           <button
             onClick={handleRefreshPreview}
             className="ml-2 rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
