@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 docs/archive
 docs/system-guidelines/june-2025.code-workspace
+
+.env.local
