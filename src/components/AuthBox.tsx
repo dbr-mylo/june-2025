@@ -8,7 +8,15 @@ export default function AuthBox() {
 
   const handleLogin = async () => {
     setMessage(null)
-    const { error } = await supabase.auth.signInWithOtp({ email })
+
+    // Automatically use live site on Vercel or fallback to localhost for local dev
+    const redirectUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectUrl },
+    })
 
     if (error) {
       console.error('Login failed:', error.message)
