@@ -66,6 +66,7 @@ export default function Editor({
     }
 
     const content = editor.getJSON()
+
     const payload = {
       content,
       template_id: selectedTemplate,
@@ -96,6 +97,7 @@ export default function Editor({
 
   return (
     <div className="flex flex-col h-screen w-full">
+
       {/* Document title */}
       <div className="px-6 py-3 border-b border-gray-200">
         <input
@@ -107,37 +109,42 @@ export default function Editor({
       </div>
 
       {/* Toolbar */}
-      <div className="border-b border-gray-200 px-6 py-2 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <EditorToolbar editor={editor} />
-        </div>
-        <div className="flex items-center gap-2">
+      <div className="sticky top-0 z-10 border-b border-gray-200 px-6 py-2 bg-white shadow-md flex items-center gap-4">
+
+        {/* Editor formatting buttons */}
+        <EditorToolbar editor={editor} />
+
+        {/* Right side controls */}
+        <div className="flex items-center gap-4 ml-auto">
           <TemplateSelector
             selected={selectedTemplate}
             onChange={setSelectedTemplate}
           />
+
           <button
             onClick={handleRefreshPreview}
-            className="ml-2 rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
+            className="rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
           >
             Refresh Preview
           </button>
+
           <button
             onClick={handleSave}
-            className="ml-2 rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-700"
+            className="rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-700"
           >
             Save
           </button>
         </div>
       </div>
 
-      {/* Editor + Preview */}
+      {/* Editor and Preview */}
       <div className="flex flex-grow w-full">
         <div className="w-1/2 border-r border-gray-200 overflow-y-auto">
           <div className="content-wrapper">
             <EditorContent editor={editor} ref={editorRef} />
           </div>
         </div>
+
         <div className="w-1/2 overflow-y-auto">
           <div className="content-wrapper">
             {previewContent ? (
@@ -147,7 +154,7 @@ export default function Editor({
               />
             ) : (
               <p className="text-gray-400 italic">
-                Click "Refresh Preview" to view formatted output
+                Click Refresh Preview to view formatted output
               </p>
             )}
           </div>
