@@ -80,14 +80,14 @@ export const TEMPLATES = {
           fontFamily: 'Gill Sans, sans-serif',
           fontWeight: '600',
           color: '#25408E',
-          textAlign: 'right',
-          margin: '0 0 40px -19px',
-          lineHeight: '28px',
+          textAlign: 'left',
+          margin: '0 0 40px 0px',
+          lineHeight: '38px',
           padding: '0px',
-          backgroundImage: 'linear-gradient(#d9d9d9, #d9d9d9), linear-gradient(#d9d9d9, #d9d9d9), linear-gradient(#d9d9d9, #d9d9d9)',
+          backgroundImage: 'linear-gradient(to right, #ededed 0%, #ededed 94%,  #25408E 100%), linear-gradient(to right, #ededed 0%, #ededed 94%,  #25408E 100%), linear-gradient(to right, #ededed 0%, #ededed 94%, #25408E 100%)',
           backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
-          backgroundSize: '190px 3px, 190px 3px, 190px 3px',
-          backgroundPosition: '20px calc(50% - 8px), 20px 50%, 20px calc(50% + 8px)'
+          backgroundSize: '100% 5px, 95% 5px, 90% 5px',
+          backgroundPosition: '0px calc(50% - 16px), 0px 50%, 0px calc(50% + 16px)'
         },
     h2: {
           paddingTop: '10px',
