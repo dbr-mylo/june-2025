@@ -96,57 +96,61 @@ export default function Editor({
   }, [editor, selectedTemplate, documentId, title])
 
   return (
-    <div className="flex flex-col h-screen w-full">
+    <div className="flex flex-col w-full bg-white">
 
-      {/* Document title */}
-      <div className="px-6 py-3 border-b border-gray-200">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="text-xl font-semibold text-gray-900 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-gray-300 border border-transparent rounded px-1 py-0.5"
-        />
-      </div>
+      {/* Sticky header block */}
+      <div className="sticky top-0 z-20 bg-white border-b border-gray-200 shadow-sm">
 
-      {/* Toolbar */}
-      <div className="sticky top-0 z-10 border-b border-gray-200 px-6 py-2 bg-white shadow-md flex items-center gap-4">
-
-        {/* Editor formatting buttons */}
-        <EditorToolbar editor={editor} />
-
-        {/* Right side controls */}
-        <div className="flex items-center gap-4 ml-auto">
-          <TemplateSelector
-            selected={selectedTemplate}
-            onChange={setSelectedTemplate}
+        {/* Title bar */}
+        <div className="px-6 py-3 border-b border-gray-200">
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="text-xl font-semibold text-gray-900 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-gray-300 border border-transparent rounded px-1 py-0.5 w-full"
           />
+        </div>
 
-          <button
-            onClick={handleRefreshPreview}
-            className="rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
-          >
-            Refresh Preview
-          </button>
+        {/* Toolbar */}
+        <div className="px-6 py-2 bg-white flex items-center gap-4">
+          <EditorToolbar editor={editor} />
 
-          <button
-            onClick={handleSave}
-            className="rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-700"
-          >
-            Save
-          </button>
+          <div className="flex items-center gap-4 ml-auto">
+            <TemplateSelector
+              selected={selectedTemplate}
+              onChange={setSelectedTemplate}
+            />
+
+            <button
+              onClick={handleRefreshPreview}
+              className="rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
+            >
+              Refresh Preview
+            </button>
+
+            <button
+              onClick={handleSave}
+              className="rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-700"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Editor and Preview */}
+      {/* Main layout */}
       <div className="flex flex-grow w-full">
+
+        {/* Editor panel */}
         <div className="w-1/2 border-r border-gray-200 overflow-y-auto">
-          <div className="content-wrapper">
+          <div className="content-wrapper px-6 py-4">
             <EditorContent editor={editor} ref={editorRef} />
           </div>
         </div>
 
-        <div className="w-1/2 overflow-y-auto">
-          <div className="content-wrapper">
+        {/* Preview panel */}
+        <div className="w-1/2 overflow-y-auto flex justify-center bg-[#f1f1f1]">
+          <div className="content-wrapper max-w-[700px] bg-white py-6 px-8">
             {previewContent ? (
               <PreviewRenderer
                 content={previewContent}
@@ -159,6 +163,7 @@ export default function Editor({
             )}
           </div>
         </div>
+
       </div>
     </div>
   )
