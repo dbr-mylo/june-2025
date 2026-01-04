@@ -12,8 +12,7 @@ export default function AuthBox() {
     setLoading(true)
 
     // Always redirect back to the site root for Vite SPA + Supabase PKCE
-    const redirectUrl =
-      import.meta.env.VITE_SITE_URL || window.location.origin
+    const redirectUrl = `${window.location.origin}/auth/callback`
 
     const { error } = await supabase.auth.signInWithOtp({
       email,
