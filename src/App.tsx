@@ -11,7 +11,6 @@ import DocumentDashboard from "@/pages/documents"
 import DocumentEditorPage from "@/pages/documents/[id]"
 import TrashDashboard from "@/components/TrashDashboard"
 import { ContributorLayout } from "@/components/layout/ContributorLayout"
-import AuthCallbackPage from "@/pages/auth/callback"
 
 const queryClient = new QueryClient()
 
@@ -24,7 +23,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
             {/* ✅ Sidebar routes */}
             <Route element={<ContributorLayout />}>
